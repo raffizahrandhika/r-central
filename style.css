@@ -241,9 +241,7 @@ body {
 .rcentral-social-threads {
     background: linear-gradient(135deg, #2d2d2d, #000);
 }
-.rcentral-social-threads svg {
-    fill: white;
-}
+
 
 @media (max-width: 768px) {
     .rcentral-title {
