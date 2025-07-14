@@ -136,6 +136,7 @@ body {
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: 20px;
+    pointer-events: none;
 }
 
 .rcentral-card:hover {
@@ -190,6 +191,8 @@ body {
     border: none;
     cursor: pointer;
     box-shadow: 0 6px 20px rgba(96, 165, 250, 0.3);
+    position: relative;
+    z-index: 10;
 }
 
 .rcentral-card-button:hover {
