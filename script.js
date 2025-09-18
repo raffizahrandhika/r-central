@@ -1,12 +1,30 @@
+// Hamburger menu toggle
+const menuToggle = document.querySelector('.rcentral-menu-toggle');
+const navMenu = document.querySelector('.rcentral-nav');
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('open');
+  });
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+      navMenu.classList.remove('open');
+    }
+  });
+}
+
 // Smooth scrolling untuk internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+        if (this.getAttribute('href').length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            if (navMenu) navMenu.classList.remove('open');
         }
     });
 });
