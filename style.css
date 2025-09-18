@@ -3,6 +3,135 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    .rcentral-header-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 0 1rem 0;
+    }
+}
+
+.rcentral-header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 1;
+}
+
+.rcentral-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #f8fafc;
+    letter-spacing: 1px;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.rcentral-title::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+}
+
+.rcentral-subtitle {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    max-width: 400px;
+    margin: 0.2rem auto 0 auto;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.rcentral-submenu-bar {
+    width: 100%;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 5;
+}
+
+.rcentral-submenu-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem 0;
+}
+
+.rcentral-submenu-nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.rcentral-submenu-nav li {
+    margin: 0;
+}
+
+.rcentral-submenu-nav a {
+    display: block;
+    color: #f8fafc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 12px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.rcentral-submenu-nav a:hover {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .rcentral-title {
+        font-size: 1.5rem;
+    }
+
+    .rcentral-subtitle {
+        font-size: 0.9rem;
+        max-width: 200px;
+    }
+
+    .rcentral-submenu-nav a {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .rcentral-title {
+        font-size: 1.1rem;
+    }
+
+    .rcentral-subtitle {
+        font-size: 0.8rem;
+        max-width: 120px;
+    }
+
+    .rcentral-submenu-nav ul {
+        gap: 0.7rem;
+    }
+
+    .rcentral-submenu-nav a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+    }
 }
 
 .rcentral-body {
@@ -21,7 +150,7 @@ body {
 
 /* Revised Header Styles */
 .rcentral-header {
-    padding: 4rem 0 3rem 0;
+    padding: /* 1.5rem 0 1rem 0 */ 0;
     text-align: center;
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
     position: relative;
@@ -48,7 +177,7 @@ body {
 .rcentral-title {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #f8fafc;
     letter-spacing: 1px;
     position: relative;
@@ -85,10 +214,11 @@ body {
 /* Main Content Styles */
 .rcentral-main {
     padding: 3rem 0;
+    padding-top: 1.5rem;
 }
 
 .rcentral-section-title {
-    font-size: 2.8rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
@@ -112,8 +242,13 @@ body {
 }
 
 @keyframes grow {
-    from { width: 0; }
-    to { width: 100px; }
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100px;
+    }
 }
 
 .rcentral-cards-grid {
@@ -161,7 +296,7 @@ body {
 }
 
 .rcentral-card:hover {
-    transform: translateY(-12px) scale(1.02);
+    /* Hanya efek hover biasa, tanpa zoom */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(96, 165, 250, 0.2);
 }
 
@@ -185,7 +320,7 @@ body {
 }
 
 .rcentral-card h3 {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: #f8fafc;
@@ -197,6 +332,7 @@ body {
     text-align: center;
     line-height: 1.7;
     margin-bottom: 1.5rem;
+    font-size: 0.95rem;
 }
 
 .rcentral-card-button {
@@ -306,7 +442,7 @@ body {
 
 .rcentral-copyright p {
     color: #64748b;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     letter-spacing: 0.5px;
 }
 
@@ -316,38 +452,51 @@ body {
 }
 
 @keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
     .rcentral-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     .rcentral-subtitle {
-        font-size: 1rem;
-        padding: 0 1rem;
+        font-size: 0.75rem;
+        max-width: 300px;
     }
     .rcentral-section-title {
-        font-size: 2.2rem;
+        font-size: 1.3rem;
     }
+
     .rcentral-cards-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
+
     .rcentral-card {
         padding: 2rem;
     }
+
     .rcentral-social-icons {
         gap: 1rem;
     }
+
     .rcentral-social-icon {
         width: 35px;
         height: 35px;
         font-size: 1rem;
     }
+
     .rcentral-footer-content {
         flex-direction: column;
     }
