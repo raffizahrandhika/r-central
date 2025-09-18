@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Jadwal Kepulangan ke Rumah</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fira Sans', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .rcentral-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .rcentral-header {
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .rcentral-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .rcentral-header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 0 1rem 0;
+        }
+
+        .rcentral-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f8fafc;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .rcentral-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+        }
+
+        .rcentral-subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 1rem auto;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        .rcentral-submenu-bar {
+            width: 100%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        .rcentral-submenu-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.7rem 0;
+        }
+
+        .rcentral-submenu-nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .rcentral-submenu-nav li {
+            margin: 0;
+        }
+
+        .rcentral-submenu-nav a {
+            display: block;
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 12px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .rcentral-submenu-nav a:hover {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            color: #fff;
+        }
+
+        /* Main Content Styles */
+        .rcentral-main {
+            padding: 3rem 0;
+            padding-top: 1.5rem;
+        }
+
+        .rcentral-section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #f8fafc;
+            position: relative;
+            display: block;
+        }
+
+        .rcentral-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            border-radius: 3px;
+            animation: grow 1s ease-out forwards;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+        }
+
+        @keyframes grow {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
+            }
+        }
+
+        /* Footer Styles */
+        .rcentral-footer {
+            background: #0f172a;
+            padding: 3rem 0 2rem 0;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .rcentral-footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .rcentral-footer-logo {
+            text-align: center;
+        }
+
+        .rcentral-footer-logo h3 {
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .rcentral-footer-logo p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .rcentral-social-section {
+            text-align: center;
+        }
+
+        .rcentral-social-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #f8fafc;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .rcentral-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .rcentral-social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(148, 163, 184, 0.1);
+            text-decoration: none;
+        }
+
+        .rcentral-social-icon:focus,
+        .rcentral-social-icon:active {
+            text-decoration: none;
+        }
+
+        .rcentral-social-icon:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            text-decoration: none;
+        }
+
+        .rcentral-copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .rcentral-copyright p {
+            color: #64748b;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Jadwal Styles */
+        :root {
+            --primary-color: #a78bfa;
+            --secondary-color: #c4b5fd;
+            --accent-color: #f472b6;
+            --light-color: #e2e8f0;
+            --success-color: #86efac;
+            --warning-color: #fcd34d;
+            --dark-bg: #0f0f23;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .jadwal-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 12px;
+        }
+
+        .jadwal-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            padding: 0 8px;
+        }
+
+        .jadwal-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .jadwal-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .countdown-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .countdown-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .next-trip {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .trip-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .trip-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .countdown-label {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-unit {
+            text-align: center;
+            min-width: 50px;
+            background: rgba(148, 163, 184, 0.1);
+            padding: 8px 4px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .countdown-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 2px 8px #374151, 0 0px 2px #60a5fa;
+        }
+
+        .countdown-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .schedule-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .schedule-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .schedule-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .schedule-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 8px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .schedule-item:hover {
+            background-color: rgba(148, 163, 184, 0.1);
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-checkbox {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: var(--primary-color);
+        }
+
+        .schedule-details {
+            flex-grow: 1;
+            margin-right: 8px;
+        }
+
+        .schedule-name {
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .schedule-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .schedule-time {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .schedule-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-upcoming {
+            background-color: rgba(96, 165, 250, 0.2);
+            color: var(--primary-color);
+        }
+
+        .status-completed {
+            background-color: rgba(134, 239, 172, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-missed {
+            background-color: rgba(252, 211, 77, 0.2);
+            color: var(--warning-color);
+        }
+
+        .schedule-section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+            color: var(--text-primary);
+        }
+
+        /* Styling untuk kelengkapan barang */
+        #kelengkapan-container > div {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        #kelengkapan-container > div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        #kelengkapan-container h2 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        #kelengkapan-input {
+            flex: 1;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            min-width: 0;
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--text-primary);
+        }
+
+        #kelengkapan-add {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+        }
+
+        /* Media queries untuk perangkat dengan layar lebih besar */
+        @media (min-width: 768px) {
+            .jadwal-header h1 {
+                font-size: 2rem;
+            }
+            
+            .jadwal-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .countdown-container {
+                padding: 25px;
+            }
+            
+            .countdown-unit {
+                min-width: 80px;
+                padding: 12px 8px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .schedule-container {
+                padding: 25px;
+            }
+            
+            .schedule-name {
+                font-size: 1.1rem;
+            }
+            
+            .trip-name {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+            
+            .trip-date {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .jadwal-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            .countdown-container {
+                padding: 8px;
+            }
+            .rcentral-title {
+                font-size: 1.2rem;
+            }
+            .rcentral-subtitle {
+                font-size: 0.7rem;
+                max-width: 180px;
+            }
+            .rcentral-section-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="rcentral-header">
+      <div class="rcentral-container">
+        <div class="rcentral-header-center">
+          <h1 class="rcentral-title">R-CENTRAL</h1>
+          <p class="rcentral-subtitle">Raffi’s Creative Exchange Network, Tools, Reflections, And Links</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="rcentral-main">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">Jadwal Kepulangan ke Rumah</h2>
+            
+            <div class="jadwal-container">
+                <div class="countdown-container">
+                    <p class="next-trip">
+                        Kepulangan berikutnya:
+                    </p>
+                    <div class="trip-name" id="nextTripName">
+                        Memuat...
+                    </div>
+                    <div class="trip-date" id="nextTripDate">
+                        Memuat tanggal...
+                    </div>
+                    
+                    <div class="countdown-label">
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="days">0</div>
+                            <div class="countdown-text">Hari</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="hours">0</div>
+                            <div class="countdown-text">Jam</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="minutes">0</div>
+                            <div class="countdown-text">Menit</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="seconds">0</div>
+                            <div class="countdown-text">Detik</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="kelengkapan-container" style="display:none; margin-bottom:20px;">
+                    <div>
+                        <h2 style="display:flex; align-items:center; gap:8px; color:#fff;">
+                            <svg class="icon" viewBox="0 0 24 24" fill="#fff" style="min-width:20px; min-height:20px;">
+                                <rect x="4" y="6" width="16" height="2" rx="1"/>
+                                <rect x="4" y="11" width="16" height="2" rx="1"/>
+                                <rect x="4" y="16" width="16" height="2" rx="1"/>
+                            </svg>
+                            Periksa Kelengkapan Barang
+                        </h2>
+                        <hr style="border:none; border-top:1.5px solid rgba(148,163,184,0.2); margin:8px 0 16px 0;">
+                        <ul id="kelengkapan-list" style="list-style:none; padding-left:0; margin-bottom:12px;"></ul>
+                        <div style="display:flex; gap:8px; margin-bottom:8px; align-items:center;">
+                            <input type="text" id="kelengkapan-input" placeholder="Nama barang..." style="flex:1; padding:6px 10px; border-radius:6px; border:1px solid #ccc; min-width:0;">
+                            <button id="kelengkapan-add" style="background:#3498db; color:white; border:none; border-radius:6px; padding:6px 10px; cursor:pointer; display:flex; align-items:center; justify-content:center; min-width:36px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="12" fill="#3498db"/>
+                                    <path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <small style="color:#94a3b8;">Checklist barang yang sudah siap. Hapus jika salah input.</small>
+                    </div>
+                </div>
+
+                <div class="schedule-container">
+                    <div class="schedule-header">
+                        <h2 class="schedule-title">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                            Daftar Kepulangan
+                        </h2>
+                    </div>
+                    
+                    <!-- Bagian untuk jadwal akan datang -->
+                    <div class="schedule-section" id="upcomingSection">
+                        <div class="section-header">
+                            <svg class="icon" viewBox="0 0 24 24" fill="#a78bfa">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                                <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                            </svg>
+                            <h3>Kepulangan Akan Datang</h3>
+                        </div>
+                        <ul class="schedule-list" id="upcomingList"></ul>
+                    </div>
+                    
+                    <!-- Bagian untuk jadwal sudah pulang -->
+                    <div class="schedule-section" id="completedSection">
+                        <div class="section-header">
+                            <svg class="icon" viewBox="0 0 24 24" fill="#86efac">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <h3>Sudah Pulang</h3>
+                        </div>
+                        <ul class="schedule-list" id="completedList"></ul>
+                    </div>
+                    
+                    <!-- Bagian untuk jadwal terlewat -->
+                    <div class="schedule-section" id="missedSection">
+                        <div class="section-header">
+                            <svg class="icon" viewBox="0 0 24 24" fill="#fcd34d">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            <h3>Terlewat</h3>
+                        </div>
+                        <ul class="schedule-list" id="missedList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="rcentral-footer">
+      <div class="rcentral-container">
+        <div class="rcentral-footer-content">
+          <div class="rcentral-footer-logo">
+            <h3>R-CENTRAL</h3>
+            <p>Raffi’s Creative Exchange Network, Tools, Reflections, And Links</p>
+          </div>
+          <div class="rcentral-social-section">
+            <h4 class="rcentral-social-title">Connect With Me</h4>
+            <div class="rcentral-social-icons">
+              <a href="https://youtube.com/@raffizahrandhika" class="rcentral-social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://instagram.com/raffizahrandhika" class="rcentral-social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://t.me/raffizahrandhika" class="rcentral-social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+              <a href="https://tiktok.com/@raffizahrandhika" class="rcentral-social-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+              <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="rcentral-copyright">
+          <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Data jadwal kepulangan dengan jam yang spesifik
+        const returnSchedule = [
+            {
+                id: 1,
+                name: "Pulang Belajar Daring",
+                date: new Date("2025-09-01T07:00:00"), 
+                completed: false
+            },
+            {
+                id: 2,
+                name: "Pulang Reguler 1",
+                date: new Date("2025-09-19T09:00:00"), 
+                completed: false
+            },
+            {
+                id: 3,
+                name: "Pulang Reguler 2",
+                date: new Date("2025-10-17T09:00:00"), 
+                completed: false
+            },
+            {
+                id: 4,
+                name: "Pulang Reguler 3",
+                date: new Date("2025-11-14T09:00:00"), 
+                completed: false
+            },
+            {
+                id: 5,
+                name: "Pulang Reguler 4",
+                date: new Date("2025-12-12T09:00:00"), 
+                completed: false
+            },
+            {
+                id: 6,
+                name: "Libur Lebaran",
+                date: new Date("2026-04-10T13:15:00"), 
+                completed: false
+            },
+            {
+                id: 7,
+                name: "Checkout Asrama",
+                date: new Date("2026-07-25T00:00:00"), 
+                completed: false
+            }
+        ];
+
+        // Kelengkapan barang
+        let kelengkapanBarang = JSON.parse(localStorage.getItem('kelengkapanBarang') || '[]');
+
+        function renderKelengkapan() {
+            const list = document.getElementById('kelengkapan-list');
+            list.innerHTML = '';
+            kelengkapanBarang.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.style.display = 'flex';
+                li.style.alignItems = 'center';
+                li.style.marginBottom = '6px';
+                li.style.cursor = 'pointer';
+                li.innerHTML = `
+                    <input type="checkbox" ${item.checked ? 'checked' : ''} style="margin-right:8px; width:18px; height:18px; accent-color:#a78bfa; pointer-events:none;">
+                    <span style="flex:1; color:#f8fafc;">${item.name}</span>
+                    <button style="background:#f472b6; color:white; border:none; border-radius:4px; padding:4px 8px; margin-left:8px; cursor:pointer; display:flex; align-items:center; justify-content:center;" data-idx="${idx}">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `;
+                // Toggle checklist on li click (except delete button)
+                li.addEventListener('click', function(e) {
+                    if (e.target.tagName.toLowerCase() === 'button' || e.target.closest('button')) return;
+                    kelengkapanBarang[idx].checked = !kelengkapanBarang[idx].checked;
+                    saveKelengkapan();
+                    renderKelengkapan();
+                });
+                // Hapus event
+                li.querySelector('button').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    kelengkapanBarang.splice(idx, 1);
+                    saveKelengkapan();
+                    renderKelengkapan();
+                });
+                list.appendChild(li);
+            });
+        }
+
+        function saveKelengkapan() {
+            localStorage.setItem('kelengkapanBarang', JSON.stringify(kelengapanBarang));
+        }
+
+        document.getElementById('kelengkapan-add').addEventListener('click', function() {
+            const input = document.getElementById('kelengkapan-input');
+            const val = input.value.trim();
+            if(val) {
+                kelengkapanBarang.push({name: val, checked: false});
+                saveKelengkapan();
+                renderKelengkapan();
+                input.value = '';
+            }
+        });
+
+        // Tampilkan kelengkapan jika H-2
+        function checkKelengkapanVisibility() {
+            const now = new Date();
+            const upcomingTrips = returnSchedule.filter(trip => !trip.completed && trip.date > now).sort((a, b) => a.date - b.date);
+            if(upcomingTrips.length > 0) {
+                const nextTrip = upcomingTrips[0];
+                const timeRemaining = nextTrip.date - now;
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                document.getElementById('kelengkapan-container').style.display = (days <= 3 && days >= 0) ? 'block' : 'none';
+            } else {
+                document.getElementById('kelengkapan-container').style.display = 'none';
+            }
+        }
+
+        // Fungsi untuk mengupdate countdown
+        function updateCountdown() {
+            // Cari jadwal yang belum completed dan belum lewat
+            const now = new Date();
+            const upcomingTrips = returnSchedule
+                .filter(trip => !trip.completed && trip.date > now)
+                .sort((a, b) => a.date - b.date);
+            
+            if (upcomingTrips.length > 0) {
+                const nextTrip = upcomingTrips[0];
+                const timeRemaining = nextTrip.date - now;
+                
+                // Hitung hari, jam, menit, detik
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                // Update elemen countdown
+                document.getElementById('nextTripName').textContent = nextTrip.name;
+                document.getElementById('nextTripDate').textContent = `${formatDay(nextTrip.date)}, ${formatDate(nextTrip.date)} - ${formatTime(nextTrip.date)}`;
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+                
+                // Tambahkan ikon kembali setelah mengubah teks
+                document.getElementById('nextTripName').innerHTML = `
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    ${nextTrip.name}
+                `;
+                
+                document.getElementById('nextTripDate').innerHTML = `
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
+                    ${formatDay(nextTrip.date)}, ${formatDate(nextTrip.date)} - ${formatTime(nextTrip.date)}
+                `;
+            } else {
+                document.getElementById('nextTripName').textContent = "Tidak ada jadwal";
+                document.getElementById('nextTripDate').textContent = "Tidak ada jadwal kepulangan yang akan datang";
+                document.getElementById('days').textContent = "0";
+                document.getElementById('hours').textContent = "0";
+                document.getElementById('minutes').textContent = "0";
+                document.getElementById('seconds').textContent = "0";
+                
+                // Tambahkan ikon untuk keadaan tidak ada jadwal
+                document.getElementById('nextTripName').innerHTML = `
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/>
+                    </svg>
+                    Tidak ada jadwal
+                `;
+            }
+        }
+
+        // Fungsi untuk memformat hari
+        function formatDay(date) {
+            const options = { weekday: 'long' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Fungsi untuk memformat tanggal
+        function formatDate(date) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Fungsi untuk memformat waktu
+        function formatTime(date) {
+            const options = { hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleTimeString('id-ID', options);
+        }
+
+        // Fungsi untuk merender daftar jadwal dengan pengelompokan
+        function renderSchedule() {
+            const upcomingList = document.getElementById('upcomingList');
+            const completedList = document.getElementById('completedList');
+            const missedList = document.getElementById('missedList');
+            
+            upcomingList.innerHTML = '';
+            completedList.innerHTML = '';
+            missedList.innerHTML = '';
+            
+            const now = new Date();
+            
+            returnSchedule.forEach(trip => {
+                const listItem = document.createElement('li');
+                listItem.className = 'schedule-item';
+                listItem.style.cursor = 'pointer';
+                // Tentukan status
+                let statusClass, statusText;
+                if (trip.completed) {
+                    statusClass = 'status-completed';
+                    statusText = 'Sudah Pulang';
+                } else if (trip.date < now) {
+                    statusClass = 'status-missed';
+                    statusText = 'Terlewat';
+                } else {
+                    statusClass = 'status-upcoming';
+                    statusText = 'Akan Datang';
+                }
+                listItem.innerHTML = `
+                    <input type="checkbox" class="schedule-checkbox" id="trip-${trip.id}" ${trip.completed ? 'checked' : ''} style="pointer-events:none;">
+                    <div class="schedule-details">
+                        <div class="schedule-name">
+                            ${trip.name}
+                        </div>
+                        <div class="schedule-date">
+                            ${formatDate(trip.date)}
+                        </div>
+                        <div class="schedule-time">
+                            Jam: ${formatTime(trip.date)}
+                        </div>
+                    </div>
+                    <div class="schedule-status ${statusClass}">
+                        ${statusText}
+                    </div>
+                `;
+                // Toggle checklist on li click
+                listItem.addEventListener('click', function(e) {
+                    // Hanya toggle jika bukan klik pada status
+                    if (e.target.classList.contains('schedule-status')) return;
+                    trip.completed = !trip.completed;
+                    saveToLocalStorage();
+                    renderSchedule();
+                    updateCountdown();
+                });
+                // Tambahkan ke daftar yang sesuai
+                if (trip.completed) {
+                    completedList.appendChild(listItem);
+                } else if (trip.date < now) {
+                    missedList.appendChild(listItem);
+                } else {
+                    upcomingList.appendChild(listItem);
+                }
+            });
+            
+            // Sembunyikan bagian yang kosong
+            document.getElementById('upcomingSection').style.display = upcomingList.children.length ? 'block' : 'none';
+            document.getElementById('completedSection').style.display = completedList.children.length ? 'block' : 'none';
+            document.getElementById('missedSection').style.display = missedList.children.length ? 'block' : 'none';
+        }
+
+        // Fungsi untuk menyimpan data ke localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('returnSchedule', JSON.stringify(returnSchedule));
+        }
+
+        // Fungsi untuk memuat data dari localStorage
+        function loadFromLocalStorage() {
+            const savedSchedule = localStorage.getItem('returnSchedule');
+            if (savedSchedule) {
+                const parsedSchedule = JSON.parse(savedSchedule);
+                
+                // Update completed status
+                parsedSchedule.forEach(savedTrip => {
+                    const trip = returnSchedule.find(t => t.id === savedTrip.id);
+                    if (trip) {
+                        trip.completed = savedTrip.completed;
+                    }
+                });
+            }
+        }
+
+        // Inisialisasi
+        function init() {
+            loadFromLocalStorage();
+            renderSchedule();
+            updateCountdown();
+            renderKelengkapan();
+            checkKelengkapanVisibility();
+            setInterval(() => {
+                updateCountdown();
+                checkKelengkapanVisibility();
+            }, 1000);
+        }
+
+        // Jalankan inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
