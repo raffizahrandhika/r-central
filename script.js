@@ -1,57 +1,3 @@
-// Hamburger menu toggle
-const menuToggle = document.querySelector('.rcentral-menu-toggle');
-const navMenu = document.querySelector('.rcentral-nav');
-if (menuToggle && navMenu) {
-  menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('open');
-  });
-  // Close menu on outside click
-  document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-      navMenu.classList.remove('open');
-    }
-  });
-}
-
-// Smooth scrolling untuk internal links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        if (this.getAttribute('href').length > 1) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-            if (navMenu) navMenu.classList.remove('open');
-        }
-    });
-});
-
-// Intersection Observer untuk animasi card
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe all cards
-document.querySelectorAll('.rcentral-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
-
 // Navigation Toggle for Mobile
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.rcentral-nav-toggle');
@@ -78,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function() {
             navMenu.classList.remove('active');
             body.style.overflow = ''; // Restore scroll
+            
+            // Update active state
+            setActiveNavLink(this);
         });
     });
     
@@ -89,6 +38,68 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             body.style.overflow = '';
+        }
+    });
+    
+    // Function to set active navigation link
+    function setActiveNavLink(clickedLink) {
+        // Remove active class from all links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Add active class to clicked link
+        clickedLink.classList.add('active');
+    }
+    
+    // Scroll spy to update active nav link based on section in view
+    function updateActiveNavOnScroll() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 100;
+        
+        // Find the current section in view
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                currentSectionId = sectionId;
+            }
+        });
+        
+        // If we're at the very top of the page, set Home as active
+        if (scrollPos < 100) {
+            currentSectionId = 'home';
+        }
+        
+        // Update active nav link
+        if (currentSectionId) {
+            // Remove active class from all links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to corresponding link
+            const activeLink = document.querySelector(`.rcentral-nav-menu a[href="#${currentSectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    
+    // Initialize active nav on page load
+    updateActiveNavOnScroll();
+    
+    // Update active nav on scroll with throttle for performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(function() {
+                scrollTimeout = null;
+                updateActiveNavOnScroll();
+            }, 100);
         }
     });
     
@@ -107,31 +118,72 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth'
                 });
             }
+            
+            // Update active state
+            setActiveNavLink(this);
         });
     });
     
-    // Add animation to skill bars when they come into view
-    const skillBars = document.querySelectorAll('.rcentral-skill-progress');
+    // Animate skill bars when they come into view
+    const skillBars = document.querySelectorAll('.skill-bar');
     
-    const observer = new IntersectionObserver((entries) => {
+    const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const skillBar = entry.target;
-                const width = skillBar.style.width;
-                skillBar.style.width = '0';
+                const percentage = skillBar.getAttribute('data-percentage');
                 
+                // Reset width to 0 for animation
+                skillBar.style.width = '0%';
+                
+                // Animate to the actual percentage
                 setTimeout(() => {
                     skillBar.style.transition = 'width 1.5s ease-in-out';
-                    skillBar.style.width = width;
+                    skillBar.style.width = percentage + '%';
                 }, 300);
                 
-                observer.unobserve(skillBar);
+                skillObserver.unobserve(skillBar);
             }
         });
     }, { threshold: 0.5 });
     
     skillBars.forEach(bar => {
-        observer.observe(bar);
+        skillObserver.observe(bar);
+    });
+    
+    // Add hover effect to skill categories
+    const skillCategories = document.querySelectorAll('.skill-category');
+    skillCategories.forEach(category => {
+        category.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+        });
+        
+        category.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Intersection Observer untuk animasi card
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all cards
+    document.querySelectorAll('.rcentral-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
     });
     
     // Close menu on window resize (if resizing to desktop)
@@ -141,4 +193,10 @@ document.addEventListener('DOMContentLoaded', function() {
             body.style.overflow = '';
         }
     });
+    
+    // Set Home as active by default on page load
+    const homeLink = document.querySelector('.rcentral-nav-menu a[href="#home"]');
+    if (homeLink && !document.querySelector('.rcentral-nav-menu a.active')) {
+        homeLink.classList.add('active');
+    }
 });
