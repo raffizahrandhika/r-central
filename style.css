@@ -1,141 +1,18 @@
 /* Base Styles */
+:root {
+    --font-stack: 'Nunito', 'Fira Sans', sans-serif;
+    --primary-gradient: linear-gradient(135deg, #7dd3fc 0%, #0ea5e9 100%);
+    --accent-gradient: linear-gradient(135deg, #7dd3fc, #38bdf8);
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-    .rcentral-header-center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem 0 1rem 0;
-    }
-}
-
-.rcentral-header-title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    flex: 1;
-}
-
-.rcentral-title {
-    font-size: 2.3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #f8fafc;
-    letter-spacing: 1px;
-    position: relative;
-    text-align: center;
-    display: inline-block;
-}
-
-.rcentral-title::after {
-    content: '';
-    position: absolute;
-    bottom: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
-}
-
-.rcentral-subtitle {
-    font-size: 1.05rem;
-    color: #94a3b8;
-    max-width: 400px;
-    margin: 0.2rem auto 0 auto;
-    letter-spacing: 0.5px;
-    font-weight: 300;
-    text-align: center;
-}
-
-.rcentral-submenu-bar {
-    width: 100%;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    border-radius: 0 0 24px 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 5;
-}
-
-.rcentral-submenu-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.7rem 0;
-}
-
-.rcentral-submenu-nav ul {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.rcentral-submenu-nav li {
-    margin: 0;
-}
-
-.rcentral-submenu-nav a {
-    display: block;
-    color: #f8fafc;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 0.5rem 1.2rem;
-    border-radius: 12px;
-    transition: background 0.2s, color 0.2s;
-}
-
-.rcentral-submenu-nav a:hover {
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
-    color: #fff;
-}
-
-@media (max-width: 900px) {
-    .rcentral-title {
-        font-size: 1.5rem;
-    }
-
-    .rcentral-subtitle {
-        font-size: 0.9rem;
-        max-width: 200px;
-    }
-
-    .rcentral-submenu-nav a {
-        font-size: 0.95rem;
-        padding: 0.4rem 0.8rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .rcentral-title {
-        font-size: 1.1rem;
-    }
-
-    .rcentral-subtitle {
-        font-size: 0.8rem;
-        max-width: 120px;
-    }
-
-    .rcentral-submenu-nav ul {
-        gap: 0.7rem;
-    }
-
-    .rcentral-submenu-nav a {
-        font-size: 0.85rem;
-        padding: 0.3rem 0.5rem;
-    }
 }
 
 .rcentral-body {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: var(--font-stack);
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
     min-height: 100vh;
     color: #e2e8f0;
@@ -148,107 +25,508 @@ body {
     padding: 0 20px;
 }
 
-/* Revised Header Styles */
-.rcentral-header {
-    padding: /* 1.5rem 0 1rem 0 */ 0;
-    text-align: center;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+/* Navigation */
+.rcentral-nav {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0.5rem 0;
 }
 
-.rcentral-header::before {
+.rcentral-nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rcentral-nav-logo h2 {
+    font-weight: 700;
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.rcentral-nav-subtitle {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin: 0;
+    font-weight: 300;
+}
+
+.rcentral-nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.rcentral-nav-menu a {
+    color: #f8fafc;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.rcentral-nav-menu a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.rcentral-nav-menu a:hover {
+    color: #fff;
+}
+
+.rcentral-nav-menu a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.rcentral-nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 101;
+    position: relative;
+}
+
+.rcentral-nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #f8fafc;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.rcentral-hero {
+    padding: 6rem 0 4rem 0;
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.rcentral-hero::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle at 70% 30%, rgba(125, 211, 252, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
-.rcentral-logo {
-    position: relative;
-    z-index: 2;
+.rcentral-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
 }
 
-.rcentral-title {
-    font-size: 3.5rem;
+.rcentral-hero-text {
+    flex: 1;
+}
+
+.rcentral-hero-title {
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: #f8fafc;
-    letter-spacing: 1px;
-    position: relative;
-    display: inline-block;
 }
 
-.rcentral-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+.rcentral-hero-title span {
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.rcentral-divider {
-    width: 120px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent);
-    margin: 1.5rem auto;
-}
-
-.rcentral-subtitle {
-    font-size: 1.1rem;
+.rcentral-hero-subtitle {
+    font-size: 1.5rem;
     color: #94a3b8;
-    max-width: 600px;
-    margin: 1rem auto;
-    letter-spacing: 0.5px;
-    font-weight: 300;
+    margin-bottom: 1.5rem;
 }
 
-/* Main Content Styles */
-.rcentral-main {
-    padding: 3rem 0;
-    padding-top: 1.5rem;
+.rcentral-hero-description {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    line-height: 1.7;
+    text-align: justify;
 }
 
-.rcentral-section-title {
+.rcentral-hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.rcentral-hero-btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.rcentral-hero-btn-primary {
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    color: white;
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
+}
+
+.rcentral-hero-btn-primary:hover {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(125, 211, 252, 0.4);
+}
+
+.rcentral-hero-btn-secondary {
+    background: transparent;
+    color: #7dd3fc;
+    border: 2px solid #7dd3fc;
+}
+
+.rcentral-hero-btn-secondary:hover {
+    background: rgba(125, 211, 252, 0.1);
+    transform: translateY(-3px);
+}
+
+.rcentral-hero-image {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rcentral-hero-avatar {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: #7dd3fc;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 4px solid rgba(125, 211, 252, 0.3);
+}
+
+/* About Section */
+.rcentral-about {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(51, 65, 85, 0.7) 100%);
+}
+
+.rcentral-about-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.rcentral-about-text {
+    flex: 1;
+}
+
+.rcentral-about-text h3 {
+    font-size: 1.8rem;
+    color: #f8fafc;
+    margin-bottom: 1.5rem;
+}
+
+.rcentral-about-text p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-size: 1.05rem; /* Disesuaikan agar konsisten di mobile */
+    text-align: justify;
+}
+
+.rcentral-about-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.rcentral-stat {
+    text-align: center;
+}
+
+.rcentral-stat-number {
+    display: block;
     font-size: 2rem;
     font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #f8fafc;
-    position: relative;
-    display: block;
+    color: #7dd3fc;
+    margin-bottom: 0.5rem;
 }
 
-.rcentral-section-title::after {
+.rcentral-stat-label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.rcentral-about-image {
+    flex: 0 0 300px;
+}
+
+.rcentral-about-avatar {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #7dd3fc;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(125, 211, 252, 0.3);
+}
+
+/* Projects Section */
+.rcentral-projects {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
+}
+
+.rcentral-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.rcentral-project-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rcentral-project-card::before {
     content: '';
     position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 5px;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
-    border-radius: 3px;
-    animation: grow 1s ease-out forwards;
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 20px 20px 0 0;
 }
 
-@keyframes grow {
-    from {
-        width: 0;
-    }
+.rcentral-project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(125, 211, 252, 0.2);
+}
 
-    to {
-        width: 100px;
-    }
+.rcentral-project-icon {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
+}
+
+.rcentral-project-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #f8fafc;
+    text-align: center;
+}
+
+/* ✅ Disesuaikan: sama seperti Quiz Agenda */
+.rcentral-project-card p {
+    color: #94a3b8;
+    text-align: center;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem; /* ← disamakan */
+}
+
+.rcentral-project-links {
+    text-align: center;
+}
+
+.rcentral-project-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    color: white !important;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
+}
+
+.rcentral-project-link:hover {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(125, 211, 252, 0.4);
+}
+
+/* Skills Section */
+.rcentral-skills {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(51, 65, 85, 0.7) 100%);
+}
+
+.rcentral-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.rcentral-skill-category h3 {
+    font-size: 1.5rem;
+    color: #f8fafc;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.rcentral-skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rcentral-skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rcentral-skill-name {
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.rcentral-skill-bar {
+    height: 10px;
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.rcentral-skill-progress {
+    height: 100%;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+}
+
+/* Achievements Section */
+.rcentral-achievements {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
+}
+
+.rcentral-achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.rcentral-achievement-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.rcentral-achievement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(125, 211, 252, 0.2);
+}
+
+.rcentral-achievement-preview {
+    height: 180px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rcentral-certificate-placeholder {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
+}
+
+.rcentral-achievement-content {
+    padding: 1.5rem;
+}
+
+.rcentral-achievement-content h3 {
+    font-size: 1.3rem;
+    color: #f8fafc;
+    margin-bottom: 0.8rem;
+}
+
+/* ✅ Disesuaikan: sama seperti Quiz Agenda */
+.rcentral-achievement-content p {
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    text-align: justify;
+    font-size: 0.95rem; /* ← disamakan */
+}
+
+.rcentral-achievement-date {
+    display: inline-block;
+    background: rgba(125, 211, 252, 0.1);
+    color: #7dd3fc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Quiz Agenda Section */
+.rcentral-quiz-agenda {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(51, 65, 85, 0.7) 100%);
 }
 
 .rcentral-cards-grid {
@@ -277,7 +555,7 @@ body {
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     border-radius: 20px 20px 0 0;
 }
 
@@ -288,7 +566,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.05), rgba(167, 139, 250, 0.05));
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.05), rgba(56, 189, 248, 0.05));
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: 20px;
@@ -296,8 +574,7 @@ body {
 }
 
 .rcentral-card:hover {
-    /* Hanya efek hover biasa, tanpa zoom */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(96, 165, 250, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(125, 211, 252, 0.2);
 }
 
 .rcentral-card:hover::after {
@@ -313,10 +590,10 @@ body {
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     border-radius: 50%;
     margin: 0 auto 1.5rem auto;
-    box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
 }
 
 .rcentral-card h3 {
@@ -337,7 +614,7 @@ body {
 
 .rcentral-card-button {
     display: inline-block;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     color: white !important;
     padding: 0.8rem 1.6rem;
     border-radius: 12px;
@@ -347,18 +624,69 @@ body {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(96, 165, 250, 0.3);
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
     position: relative;
     z-index: 10;
 }
 
 .rcentral-card-button:hover {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4);
+    box-shadow: 0 10px 25px rgba(125, 211, 252, 0.4);
 }
 
-/* Revised Footer Styles */
+/* Floating Animation */
+.rcentral-floating {
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Section Title */
+.rcentral-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #f8fafc;
+    position: relative;
+    display: block;
+}
+
+.rcentral-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 3px;
+    animation: grow 1s ease-out forwards;
+    box-shadow: 0 0 20px rgba(125, 211, 252, 0.5);
+}
+
+@keyframes grow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+/* Footer */
 .rcentral-footer {
     background: #0f172a;
     padding: 3rem 0 2rem 0;
@@ -368,13 +696,19 @@ body {
 .rcentral-footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     margin-bottom: 2rem;
 }
 
+.rcentral-footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
 .rcentral-footer-logo {
-    text-align: center;
+    flex: 1;
 }
 
 .rcentral-footer-logo h3 {
@@ -388,10 +722,45 @@ body {
     color: #94a3b8;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
+    max-width: 300px;
+    text-align: justify;
+}
+
+.rcentral-footer-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.rcentral-footer-column h4 {
+    font-size: 1.1rem;
+    color: #f8fafc;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.rcentral-footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rcentral-footer-column li {
+    margin-bottom: 0.5rem;
+}
+
+.rcentral-footer-column a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 0.9rem;
+}
+
+.rcentral-footer-column a:hover {
+    color: #7dd3fc;
 }
 
 .rcentral-social-section {
-    text-align: center;
+    text-align: left;
 }
 
 .rcentral-social-title {
@@ -405,7 +774,7 @@ body {
 
 .rcentral-social-icons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1.2rem;
 }
 
@@ -430,74 +799,353 @@ body {
 
 .rcentral-social-icon:hover {
     transform: translateY(-3px);
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     text-decoration: none;
 }
 
 .rcentral-copyright {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 1rem;
     border-top: 1px solid rgba(148, 163, 184, 0.1);
 }
 
+/* ✅ Pastikan copyright tetap center & tidak terpengaruh justify */
 .rcentral-copyright p {
     color: #64748b;
     font-size: 0.75rem;
     letter-spacing: 0.5px;
+    margin: 0.5rem 0;
+    text-align: center !important;
 }
 
-/* Floating Animation */
-.rcentral-floating {
-    animation: floating 6s ease-in-out infinite;
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 900px) {
+    .rcentral-hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .rcentral-hero-description {
+        margin: 0 auto 2rem auto;
+    }
+    
+    .rcentral-about-content {
+        flex-direction: column;
+    }
+    
+    .rcentral-footer-main {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .rcentral-footer-links {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .rcentral-social-section {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .rcentral-social-icons {
+        justify-content: center;
+    }
 }
 
-@keyframes floating {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-15px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-/* Responsive Styles */
 @media (max-width: 768px) {
-    .rcentral-title {
-        font-size: 2rem;
+    /* Navigation */
+    .rcentral-nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        flex-direction: column;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        width: 280px;
+        height: 100vh;
+        transition: 0.3s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+        padding: 5rem 2rem 2rem 2rem;
+        gap: 1.5rem;
+        z-index: 99;
+        margin: 0;
     }
-    .rcentral-subtitle {
-        font-size: 0.75rem;
-        max-width: 300px;
+    
+    .rcentral-nav-menu.active {
+        right: 0;
     }
-    .rcentral-section-title {
+    
+    .rcentral-nav-toggle {
+        display: flex;
+        z-index: 100;
+    }
+    
+    /* Header */
+    .rcentral-nav-logo h2 {
         font-size: 1.3rem;
     }
+    
+    .rcentral-nav-subtitle {
+        font-size: 0.7rem;
+        max-width: 270px;
+    }
+    
+    /* Hero Section */
+    .rcentral-hero {
+        padding: 5rem 0 3rem 0;
+    }
+    
+    .rcentral-hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .rcentral-hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .rcentral-hero-description {
+        font-size: 1rem;
+    }
+    
+    .rcentral-hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .rcentral-hero-btn {
+        width: auto;
+        min-width: 140px;
+        text-align: center;
+        flex: 0 0 auto;
+    }
+    
+    .rcentral-hero-image {
+        flex: 0 0 200px;
+    }
+    
+    .rcentral-hero-avatar {
+        width: 180px;
+        height: 180px;
+        font-size: 4rem;
+    }
+    
+    /* About Section */
+    .rcentral-about-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .rcentral-about-image {
+        flex: 0 0 200px;
+    }
+    
+    .rcentral-about-avatar {
+        width: 180px;
+        height: 180px;
+        font-size: 3rem;
+    }
+    
+    /* ✅ Tombol "View My Work" & "About Me" berjejer di mobile */
+    .rcentral-hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    /* Footer */
+    .rcentral-footer-logo h3 {
+        font-size: 1.3rem;
+    }
+    
+    .rcentral-footer-logo p {
+        font-size: 0.8rem;
+    }
+    
+    .rcentral-social-title {
+        font-size: 0.9rem;
+    }
+    
+    /* ✅ REVISI: Quick Links & Resources berjejer horizontal/sampingan di mobile */
+    .rcentral-footer-links {
+        display: flex;
+        flex-direction: row; /* Berjejer sampingan */
+        gap: 3rem; /* Jarak antara Quick Links dan Resources */
+        width: 100%;
+        justify-content: center; /* Pusatkan kedua kolom */
+        align-items: flex-start;
+    }
+    
+    .rcentral-footer-column {
+        flex: 0 0 auto; /* Tidak perlu flex grow, biar sesuai konten */
+        min-width: 140px;
+        text-align: left;
+    }
+    
+    .rcentral-social-icons {
+        gap: 0.8rem;
+    }
+    
+    .rcentral-social-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    /* Pastikan copyright tetap center */
+    .rcentral-copyright p {
+        text-align: center !important;
+    }
+}
 
-    .rcentral-cards-grid {
+@media (max-width: 600px) {
+    /* Main Content */
+    .rcentral-section-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Card & Content Typography — disamakan */
+    .rcentral-card,
+    .rcentral-project-card {
+        padding: 1.5rem;
+    }
+    
+    .rcentral-card h3,
+    .rcentral-project-card h3,
+    .rcentral-achievement-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .rcentral-card p,
+    .rcentral-project-card p,
+    .rcentral-achievement-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Layout Adjustments */
+    .rcentral-cards-grid,
+    .rcentral-projects-grid,
+    .rcentral-achievements-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-
-    .rcentral-card {
-        padding: 2rem;
+    
+    .rcentral-skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
-
-    .rcentral-social-icons {
-        gap: 0.7rem;
+    
+    /* Hero Buttons */
+    .rcentral-hero-buttons {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
+    
+    .rcentral-hero-btn {
+        width: 160px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+    }
+    
+    /* ✅ REVISI: Footer Links — tetap berjejer sampingan di layar kecil */
+    .rcentral-footer-links {
+        flex-direction: row; /* Tetap berjejer sampingan */
+        gap: 2rem; /* Sedikit lebih rapat */
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .rcentral-footer-column {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+    
+    /* Navigation Menu */
+    .rcentral-nav-menu {
+        width: 250px;
+    }
+    
+    /* About Stats */
+    .rcentral-about-stats {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    
+    /* My Journey Font Size */
+    .rcentral-about-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    /* Copyright */
+    .rcentral-copyright p {
+        text-align: center !important;
+    }
+}
 
-    .rcentral-social-icon {
-        width: 35px;
-        height: 35px;
+@media (max-width: 480px) {
+    .rcentral-container {
+        padding: 0 15px;
+    }
+    
+    .rcentral-hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .rcentral-hero-subtitle {
         font-size: 1rem;
     }
-
-    .rcentral-footer-content {
-        flex-direction: column;
+    
+    .rcentral-hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .rcentral-nav-menu {
+        width: 220px;
+        padding: 4rem 1.5rem 1.5rem 1.5rem;
+    }
+    
+    .rcentral-footer-main {
+        gap: 1.5rem;
+    }
+    
+    .rcentral-social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* ✅ REVISI: Footer columns — tetap berjejer sampingan bahkan di layar sangat kecil */
+    .rcentral-footer-links {
+        flex-direction: row; /* Tetap berjejer sampingan */
+        gap: 1.5rem; /* Jarak yang pas untuk layar kecil */
+        justify-content: center;
+        flex-wrap: nowrap; /* Pastikan tidak wrap ke bawah */
+    }
+    
+    .rcentral-footer-column {
+        flex: 0 0 auto;
+        text-align: center; /* Center text untuk tampilan lebih rapi */
+    }
+    
+    /* Tombol tetap berjejer */
+    .rcentral-hero-buttons {
+        flex-direction: row;
+        gap: 0.8rem;
+    }
+    
+    .rcentral-hero-btn {
+        width: 140px;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+    
+    /* Pastikan copyright tetap center */
+    .rcentral-copyright p {
+        text-align: center !important;
     }
 }
