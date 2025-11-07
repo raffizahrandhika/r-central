@@ -5,132 +5,321 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R-CENTRAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="rcentral-body">
-        <header class="rcentral-header">
-            <div class="rcentral-container">
-                <div class="rcentral-header-center">
-                    <h1 class="rcentral-title">R-CENTRAL</h1>
-                    <p class="rcentral-subtitle">Raffi’s Creative Exchange Network, Tools, Reflections, And Links</p>
+    <!-- Navigation -->
+    <nav class="rcentral-nav">
+        <div class="rcentral-container">
+            <div class="rcentral-nav-content">
+                <div class="rcentral-nav-logo">
+                    <h2>R-CENTRAL</h2>
+                    <p class="rcentral-nav-subtitle">Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                </div>
+                <ul class="rcentral-nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#quiz-agenda">Quiz Agenda</a></li>
+                </ul>
+                <div class="rcentral-nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
-        </header>
-        <div class="rcentral-submenu-bar">
-            <div class="rcentral-container">
-                <nav class="rcentral-submenu-nav" aria-label="Sub Menu">
-                    <ul>
-                        <li><a href="#featured">Featured</a></li>
-                        <li><a href="#agenda-quiz">Agenda Quiz</a></li>
-                        <li><a href="#jadwal-pulang">Jadwal Pulang</a></li>
-                    </ul>
-                </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="rcentral-hero">
+        <div class="rcentral-container">
+            <div class="rcentral-hero-content">
+                <div class="rcentral-hero-text">
+                    <h2 class="rcentral-hero-title">Hello, I'm <span>Raffi</span></h2>
+                    <p class="rcentral-hero-subtitle">Creative Developer & Problem Solver</p>
+                    <p class="rcentral-hero-description">Passionate about creating innovative solutions and sharing knowledge through interactive platforms and educational content.</p>
+                    <div class="rcentral-hero-buttons">
+                        <a href="#projects" class="rcentral-hero-btn rcentral-hero-btn-primary">View My Work</a>
+                        <a href="#about" class="rcentral-hero-btn rcentral-hero-btn-secondary">About Me</a>
+                    </div>
+                </div>
+                <div class="rcentral-hero-image">
+                    <div class="rcentral-hero-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
             </div>
         </div>
-        <main class="rcentral-main">
-            <div class="rcentral-container">
-                <section id="featured" class="rcentral-content-section">
-                    <h2 class="rcentral-section-title">Featured Content</h2>
-                    <div class="rcentral-cards-grid">
-                        <div class="rcentral-card rcentral-floating">
-                            <div class="rcentral-card-icon"><i class="fas fa-brain"></i></div>
-                            <h3>R-QUEST</h3>
-                            <p>Raffi's Quizzes, Exercises, and Smart Training - Challenge yourself with various quizzes and practice exercises to sharpen your mind.</p>
-                            <div style="text-align: center;">
-                                <a href="https://quizlabbyraffi.blogspot.com/2025/06/beranda.html" class="rcentral-card-button">Enter R-QUEST</a>
-                            </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="rcentral-about">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">About Me</h2>
+            <div class="rcentral-about-content">
+                <div class="rcentral-about-text">
+                    <h3>My Journey</h3>
+                    <p>I'm a passionate developer and educator with a strong interest in creating interactive learning experiences. Through my platforms, I aim to make knowledge accessible and engaging for everyone.</p>
+                    <p>My work spans across various domains including web development, content creation, and educational tools that help people learn in innovative ways.</p>
+                    <div class="rcentral-about-stats">
+                        <div class="rcentral-stat">
+                            <span class="rcentral-stat-number">5+</span>
+                            <span class="rcentral-stat-label">Projects</span>
                         </div>
-                        <div class="rcentral-card rcentral-floating" style="animation-delay: 0.2s;">
-                            <div class="rcentral-card-icon"><i class="fas fa-book-open"></i></div>
-                            <h3>R-STORY</h3>
-                            <p>Raffi's Space for Tales, Opinions, Reflections, and Yarns - Explore stories and reflections from my personal experiences and thoughts.</p>
-                            <div style="text-align: center;">
-                                <a href="https://mindscaperaffi.blogspot.com/" class="rcentral-card-button">Enter R-STORY</a>
-                            </div>
+                        <div class="rcentral-stat">
+                            <span class="rcentral-stat-number">3+</span>
+                            <span class="rcentral-stat-label">Years Experience</span>
                         </div>
-                    </div>
-                </section>
-                <section id="agenda-quiz" class="rcentral-content-section">
-                    <h2 class="rcentral-section-title">Agenda Quiz</h2>
-                    <div class="rcentral-cards-grid">
-                        <div class="rcentral-card rcentral-floating">
-                            <div class="rcentral-card-icon"><i class="fas fa-bolt"></i></div>
-                            <h3>Quiz Challenge 20 Days</h3>
-                            <p>Tantangan kuis selama 20 hari berturut-turut. Ikuti pengumuman dan jadwalnya di sini.</p>
-                            <div style="text-align: center;">
-                                <a href="quiz-challenge-20-days.html" class="rcentral-card-button">Lihat Pengumuman</a>
-                            </div>
-                        </div>
-                        <div class="rcentral-card rcentral-floating" style="animation-delay: 0.2s;">
-                            <div class="rcentral-card-icon"><i class="fas fa-globe"></i></div>
-                            <h3>Quiz Hunt - Wonders of Earth</h3>
-                            <p>Berburu pengetahuan tentang keajaiban bumi melalui kuis interaktif. Cek pengumuman dan jadwalnya di sini.</p>
-                            <div style="text-align: center;">
-                                <a href="quiz-hunt-wonders-earth.html" class="rcentral-card-button">Lihat Pengumuman</a>
-                            </div>
-                        </div>
-                        <div class="rcentral-card rcentral-floating" style="animation-delay: 0.4s;">
-                            <div class="rcentral-card-icon"><i class="fas fa-history"></i></div>
-                            <h3>Quiz Chronicles - The Unfolding Past</h3>
-                            <p>Kisah dan pengetahuan masa lalu dalam bentuk kuis. Lihat pengumuman dan jadwalnya di sini.</p>
-                            <div style="text-align: center;">
-                                <a href="quiz-chronicles-unfolding-past.html" class="rcentral-card-button">Lihat Pengumuman</a>
-                            </div>
+                        <div class="rcentral-stat">
+                            <span class="rcentral-stat-number">1000+</span>
+                            <span class="rcentral-stat-label">Learners Reached</span>
                         </div>
                     </div>
-                </section>
-                <section id="jadwal-pulang" class="rcentral-content-section">
-                    <h2 class="rcentral-section-title">Jadwal Pulang</h2>
-                    <div class="rcentral-cards-grid">
-                        <div class="rcentral-card rcentral-floating">
-                            <div class="rcentral-card-icon"><i class="fas fa-calendar-alt"></i></div>
-                            <h3>Jadwal Pulang</h3>
-                            <p>Cek jadwal pulang terbaru di halaman khusus berikut.</p>
-                            <div style="text-align: center;">
-                                <a href="jadwal-plg.html" class="rcentral-card-button">Lihat Jadwal Pulang</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="rcentral-about-image">
+                    <div class="rcentral-about-avatar">
+                        <i class="fas fa-code"></i>
                     </div>
-                </section>
+                </div>
             </div>
-        </main>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="rcentral-projects">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">My Projects</h2>
+            <div class="rcentral-projects-grid">
+                <div class="rcentral-project-card">
+                    <div class="rcentral-project-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>R-QUEST</h3>
+                    <p>Interactive quiz platform with various challenges and exercises to sharpen your mind.</p>
+                    <div class="rcentral-project-links">
+                        <a href="https://quizlabbyraffi.blogspot.com/2025/06/beranda.html" class="rcentral-project-link">View Project</a>
+                    </div>
+                </div>
+                <div class="rcentral-project-card">
+                    <div class="rcentral-project-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>R-STORY</h3>
+                    <p>Personal blog sharing stories, opinions, and reflections from my experiences.</p>
+                    <div class="rcentral-project-links">
+                        <a href="https://mindscaperaffi.blogspot.com/" class="rcentral-project-link">View Project</a>
+                    </div>
+                </div>
+                <div class="rcentral-project-card">
+                    <div class="rcentral-project-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Jadwal Pulang</h3>
+                    <p>Schedule management tool to help organize and track important timelines.</p>
+                    <div class="rcentral-project-links">
+                        <a href="https://raffizahrandhika.github.io/jadwal-pulang/" class="rcentral-project-link">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="rcentral-skills">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">Skills & Expertise</h2>
+            <div class="rcentral-skills-grid">
+                <div class="rcentral-skill-category">
+                    <h3>Technical Skills</h3>
+                    <div class="rcentral-skill-list">
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">Web Development</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">UI/UX Design</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">Content Creation</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rcentral-skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="rcentral-skill-list">
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">Problem Solving</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">Communication</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="rcentral-skill-item">
+                            <span class="rcentral-skill-name">Project Management</span>
+                            <div class="rcentral-skill-bar">
+                                <div class="rcentral-skill-progress" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="rcentral-achievements">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">Achievements & Activities</h2>
+            <div class="rcentral-achievements-grid">
+                <div class="rcentral-achievement-card">
+                    <div class="rcentral-achievement-preview">
+                        <div class="rcentral-certificate-placeholder">
+                            <i class="fas fa-award"></i>
+                        </div>
+                    </div>
+                    <div class="rcentral-achievement-content">
+                        <h3>Web Development Certification</h3>
+                        <p>Completed comprehensive web development course covering HTML, CSS, JavaScript and modern frameworks.</p>
+                        <span class="rcentral-achievement-date">2024</span>
+                    </div>
+                </div>
+                <div class="rcentral-achievement-card">
+                    <div class="rcentral-achievement-preview">
+                        <div class="rcentral-certificate-placeholder">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                    <div class="rcentral-achievement-content">
+                        <h3>Quiz Challenge Winner</h3>
+                        <p>Achieved top position in the 20-day quiz challenge, demonstrating extensive knowledge across various subjects.</p>
+                        <span class="rcentral-achievement-date">2023</span>
+                    </div>
+                </div>
+                <div class="rcentral-achievement-card">
+                    <div class="rcentral-achievement-preview">
+                        <div class="rcentral-certificate-placeholder">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                    </div>
+                    <div class="rcentral-achievement-content">
+                        <h3>Content Creation Excellence</h3>
+                        <p>Recognized for creating engaging educational content that has helped hundreds of learners improve their skills.</p>
+                        <span class="rcentral-achievement-date">2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Agenda Section -->
+    <section id="quiz-agenda" class="rcentral-quiz-agenda">
+        <div class="rcentral-container">
+            <h2 class="rcentral-section-title">Quiz Agenda</h2>
+            <div class="rcentral-cards-grid">
+                <div class="rcentral-card rcentral-floating">
+                    <div class="rcentral-card-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Quiz Challenge 20 Days</h3>
+                    <p>Tantangan kuis selama 20 hari berturut-turut. Ikuti pengumuman dan jadwalnya di sini.</p>
+                    <div style="text-align: center;">
+                        <a href="quiz-challenge-20-days.html" class="rcentral-card-button">Lihat Pengumuman</a>
+                    </div>
+                </div>
+                <div class="rcentral-card rcentral-floating" style="animation-delay: 0.2s;">
+                    <div class="rcentral-card-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Quiz Hunt - Wonders of Earth</h3>
+                    <p>Berburu pengetahuan tentang keajaiban bumi melalui kuis interaktif. Cek pengumuman dan jadwalnya di sini.</p>
+                    <div style="text-align: center;">
+                        <a href="quiz-hunt-wonders-earth.html" class="rcentral-card-button">Lihat Pengumuman</a>
+                    </div>
+                </div>
+                <div class="rcentral-card rcentral-floating" style="animation-delay: 0.4s;">
+                    <div class="rcentral-card-icon"><i class="fas fa-history"></i></div>
+                    <h3>Quiz Chronicles - The Unfolding Past</h3>
+                    <p>Kisah dan pengetahuan masa lalu dalam bentuk kuis. Lihat pengumuman dan jadwalnya di sini.</p>
+                    <div style="text-align: center;">
+                        <a href="quiz-chronicles-unfolding-past.html" class="rcentral-card-button">Lihat Pengumuman</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="rcentral-footer">
-    <div class="rcentral-container">
-        <div class="rcentral-footer-content">
-            <div class="rcentral-footer-logo">
-                <h3>R-CENTRAL</h3>
-                <p>Raffi’s Creative Exchange Network, Tools, Reflections, And Links</p>
-            </div>
-            <div class="rcentral-social-section">
-                <h4 class="rcentral-social-title">Connect With Me</h4>
-                <div class="rcentral-social-icons">
-                    <a href="https://youtube.com/@raffizahrandhika" class="rcentral-social-icon" title="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://instagram.com/raffizahrandhika" class="rcentral-social-icon" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://t.me/raffizahrandhika" class="rcentral-social-icon" title="Telegram">
-                        <i class="fab fa-telegram-plane"></i>
-                    </a>
-                    <a href="https://tiktok.com/@raffizahrandhika" class="rcentral-social-icon" title="TikTok">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378" class="rcentral-social-icon" title="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
+        <div class="rcentral-container">
+            <div class="rcentral-footer-content">
+                <div class="rcentral-footer-main">
+                    <div class="rcentral-footer-logo">
+                        <h3>R-CENTRAL</h3>
+                        <p>Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                    </div>
+                    <div class="rcentral-footer-links">
+                        <div class="rcentral-footer-column">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#projects">Projects</a></li>
+                            </ul>
+                        </div>
+                        <div class="rcentral-footer-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#skills">Skills</a></li>
+                                <li><a href="#achievements">Achievements</a></li>
+                                <li><a href="#quiz-agenda">Quiz Agenda</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcentral-social-section">
+                        <h4 class="rcentral-social-title">Connect With Me</h4>
+                        <div class="rcentral-social-icons">
+                            <a href="https://youtube.com/@raffizahrandhika" class="rcentral-social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://instagram.com/raffizahrandhika" class="rcentral-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://t.me/raffizahrandhika" class="rcentral-social-icon" title="Telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="https://tiktok.com/@raffizahrandhika" class="rcentral-social-icon" title="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378" class="rcentral-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="rcentral-copyright">
+                <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+            </div>
         </div>
-        <div class="rcentral-copyright">
-            <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
-        </div>
-    </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
