@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Challenge 20 Days | R-CENTRAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional Styles for Quiz Challenge Page */
+        .rcentral-main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+        
+        .rcentral-content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .quiz-content-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .quiz-content-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+            color: #f8fafc;
+        }
+        
+        .quiz-content-card h4 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #7dd3fc;
+        }
+        
+        .quiz-content-card ul {
+            margin-bottom: 1.1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .quiz-content-card li {
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .quiz-content-card b {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .result-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7em;
+            padding: 0.7em 2em;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .result-button:hover {
+            background: linear-gradient(90deg, #0ea5e9, #0284c7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+        
+        .result-button:hover::before {
+            left: 100%;
+        }
+        
+        .result-button:active {
+            transform: translateY(0);
+        }
+
+        /* Feature Highlights */
+        .feature-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(125, 211, 252, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #7dd3fc;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .rcentral-social-icons {
+                gap: 0.7rem;
+            }
+            
+            .rcentral-main {
+                padding: 1.5rem 0;
+                min-height: calc(100vh - 180px);
+            }
+            
+            .quiz-content-card {
+                padding: 1.5rem;
+                margin-top: 1.5rem;
+            }
+            
+            .quiz-content-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .quiz-content-card h4 {
+                font-size: 1.05rem;
+            }
+            
+            .quiz-content-card ul {
+                padding-left: 1.2rem;
+            }
+            
+            .quiz-content-card li {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+            
+            .result-button {
+                font-size: 0.95rem;
+                padding: 0.6em 1.5em;
+            }
+            
+            .feature-highlights {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.2rem;
+            }
+            
+            .rcentral-section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quiz-content-card {
+                padding: 1.2rem;
+            }
+            
+            .quiz-content-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .quiz-content-card h4 {
+                font-size: 1rem;
+            }
+            
+            .quiz-content-card li {
+                font-size: 0.85rem;
+            }
+            
+            .result-button {
+                font-size: 0.9rem;
+                padding: 0.5em 1.2em;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+            
+            .feature-icon {
+                font-size: 1.5rem;
+            }
+            
+            .feature-title {
+                font-size: 1rem;
+            }
+            
+            .feature-desc {
+                font-size: 0.85rem;
+            }
+            
+            .rcentral-section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="rcentral-body">
+    <!-- Navigation -->
+    <nav class="rcentral-nav">
+        <div class="rcentral-container">
+            <div class="rcentral-nav-content">
+                <div class="rcentral-nav-logo">
+                    <h2>R-CENTRAL</h2>
+                    <p class="rcentral-nav-subtitle">Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="rcentral-main">
+        <div class="rcentral-container">
+            <section class="rcentral-content-section">
+                <h2 class="rcentral-section-title">Quiz Challenge 20 Days</h2>
+                <div class="rcentral-card">
+                    <p>Tantangan kuis selama 20 hari berturut-turut untuk mengasah pengetahuan dan membangun konsistensi belajar!</p>
+                </div>
+                
+                <div class="quiz-content-card">
+                    <h3>🧠 Quiz Challenge – 20 Days</h3>
+                    
+                    <h4>🧾 Informasi Umum</h4>
+                    <ul>
+                        <li>Kuis berlangsung selama <b>20 hari berturut-turut</b>.</li>
+                        <li>Diselenggarakan di <b>Instagram Story @raffizahrandhika</b>.</li>
+                        <li>Setiap hari akan diunggah <b>1 soal baru</b> dengan topik berbeda — mencakup pengetahuan umum, logika, sains, budaya, hingga sejarah.</li>
+                        <li><b>Tujuan:</b> mengasah pengetahuan sekaligus membangun konsistensi belajar melalui format harian yang ringan dan menantang.</li>
+                    </ul>
+                    
+                    <h4>⚙️ Cara Kerja Kuis</h4>
+                    <ul>
+                        <li>Setiap soal berbentuk <b>pilihan ganda</b> (fitur polling) di Instagram Story.</li>
+                        <li>Peserta <b>tidak langsung tahu</b> apakah jawabannya benar atau salah.</li>
+                        <li>Pembahasan soal diunggah <b>23 jam setelah soal diposting</b> (tepat sebelum soal berikutnya muncul).</li>
+                        <li>Peserta <b>bebas bergabung kapan pun</b> selama periode berlangsung.</li>
+                    </ul>
+                    
+                    <h4>🧮 Penilaian & Peringkat</h4>
+                    <ul>
+                        <li>Penilaian menggunakan sistem <b>IRT (Item Response Theory)</b> yang memperhitungkan:
+                            <ul>
+                                <li>Kesulitan soal</li>
+                                <li>Kemampuan peserta</li>
+                                <li>Konsistensi jawaban</li>
+                            </ul>
+                        </li>
+                        <li>Setiap peserta memperoleh <b>skor harian</b> yang terakumulasi menjadi total skor akhir.</li>
+                        <li>Peringkat diumumkan di akhir periode kuis, menampilkan <b>Top 5 peserta</b> dengan performa terbaik.</li>
+                    </ul>
+                    
+                    <h4>🗓️ Jadwal & Hasil</h4>
+                    <ul>
+                        <li>📅 <b>Durasi:</b> 20 hari</li>
+                        <li>📢 <b>Pembahasan:</b> 23 jam setelah tiap soal</li>
+                        <li>🏆 <b>Hasil akhir & peringkat:</b> diumumkan setelah hari ke-20</li>
+                    </ul>
+                    
+                    <!-- Feature Highlights -->
+                    <div class="feature-highlights">
+                        <div class="feature-card">
+                            <div class="feature-icon">🧠</div>
+                            <div class="feature-title">HOTS Approach</div>
+                            <div class="feature-desc">Soal menggunakan pendekatan Higher Order Thinking Skills untuk berpikir kritis</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-title">Various Themes</div>
+                            <div class="feature-desc">Tema harian berbeda: science, geography, culture, logic, dan banyak lagi</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <div class="feature-title">Modern Design</div>
+                            <div class="feature-desc">Visual kuis clean dan edukatif dengan gaya khas</div>
+                        </div>
+                    </div>
+                    
+                    <h4>🌟 Ciri Khas Quiz Challenge</h4>
+                    <ul>
+                        <li>Soal-soalnya menggunakan pendekatan <b>HOTS (Higher Order Thinking Skills)</b> agar peserta tidak hanya menebak, tetapi juga berpikir kritis.</li>
+                        <li><b>Tema harian berbeda-beda</b> (misal: science, geography, culture, mystery fact, logic day, dsb).</li>
+                        <li><b>Visual kuis dibuat dengan gaya khas</b> — clean, modern, dan edukatif — menonjolkan ikon bumi, cahaya, atau simbol pengetahuan.</li>
+                    </ul>
+                    
+                    <div style="text-align:center; margin-top:2rem;">
+                        <a href="https://quizlabbyraffi.blogspot.com/2025/06/hasil-quiz-challenge-20-days.html" class="result-button">
+                            <i class="fas fa-chart-bar" style="font-size:1.25em;"></i>
+                            Lihat Hasil Kuis
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="rcentral-footer">
+        <div class="rcentral-container">
+            <div class="rcentral-footer-content">
+                <div class="rcentral-footer-main">
+                    <div class="rcentral-footer-logo">
+                        <h3>R-CENTRAL</h3>
+                        <p>Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                    </div>
+                    <div class="rcentral-footer-links">
+                        <div class="rcentral-footer-column">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="index.html#home">Home</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                                <li><a href="index.html#projects">Projects</a></li>
+                            </ul>
+                        </div>
+                        <div class="rcentral-footer-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="index.html#skills">Skills</a></li>
+                                <li><a href="index.html#achievements">Achievements</a></li>
+                                <li><a href="index.html#quiz-agenda">Quiz Agenda</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcentral-social-section">
+                        <h4 class="rcentral-social-title">Connect With Me</h4>
+                        <div class="rcentral-social-icons">
+                            <a href="https://youtube.com/@raffizahrandhika" class="rcentral-social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://instagram.com/raffizahrandhika" class="rcentral-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://t.me/raffizahrandhika" class="rcentral-social-icon" title="Telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="https://tiktok.com/@raffizahrandhika" class="rcentral-social-icon" title="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378" class="rcentral-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rcentral-copyright">
+                <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
