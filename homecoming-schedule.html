@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Return Schedule | R-CENTRAL</title>
+    <style>
+        :root {
+            --primary: #7dd3fc;
+            --secondary: #38bdf8;
+            --accent: #0ea5e9;
+            --success: #86efac;
+            --warning: #fcd34d;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --bg-card: #1e293b;
+            --bg-dark: #0f172a;
+        }
+
+        .rcentral-main {
+            min-height: calc(100vh - 280px);
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Countdown Hero Section - FIXED */
+        .countdown-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 14px;
+            padding: 1.6rem;
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
+        }
+
+        .countdown-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(125, 211, 252, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .countdown-info {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .trip-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .trip-date {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .countdown-timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .countdown-unit {
+            background: linear-gradient(135deg, rgba(125, 211, 252, 0.15) 0%, rgba(56, 189, 248, 0.08) 100%);
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(125, 211, 252, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .countdown-unit:hover {
+            background: linear-gradient(135deg, rgba(125, 211, 252, 0.25) 0%, rgba(56, 189, 248, 0.15) 100%);
+            border-color: rgba(125, 211, 252, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+        }
+
+        .countdown-unit:hover::before {
+            opacity: 1;
+        }
+
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            animation: countPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes countPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .countdown-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 14px;
+            padding: 1.6rem;
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+        }
+
+        .section-title i {
+            font-size: 1.2rem;
+        }
+
+        .schedule-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.4);
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .schedule-item:hover {
+            background: rgba(15, 23, 42, 0.7);
+            border-color: rgba(125, 211, 252, 0.2);
+        }
+
+        .schedule-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .schedule-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .schedule-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .schedule-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .schedule-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .schedule-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-upcoming {
+            background: rgba(125, 211, 252, 0.2);
+            color: #7dd3fc;
+        }
+
+        .status-completed {
+            background: rgba(134, 239, 172, 0.2);
+            color: #86efac;
+        }
+
+        .status-missed {
+            background: rgba(252, 211, 77, 0.2);
+            color: #fcd34d;
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: none;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        /* Packing Checklist */
+        .checklist-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 14px;
+            padding: 1.6rem;
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checklist-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
+        }
+
+        .checklist-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.4);
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .checklist-item span {
+            flex: 1;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .checklist-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: none;
+            padding: 0.25rem 0.4rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .checklist-input-group {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .checklist-input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .checklist-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+            color: #022237;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(125, 211, 252, 0.3);
+        }
+
+        /* Add Custom Trip */
+        .add-trip-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 14px;
+            padding: 1.6rem;
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-trip-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
+        }
+
+        .add-trip-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-trip-form {
+            display: grid;
+            grid-template-columns: auto auto 1fr auto;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .form-input {
+            padding: 0.7rem;
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(1.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+            color: #022237;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(125, 211, 252, 0.3);
+        }
+
+        .add-trip-help {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.6rem;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .rcentral-main {
+                padding: 1.5rem 0;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .countdown-info {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .countdown-timer {
+                gap: 0.6rem;
+            }
+
+            .countdown-unit {
+                padding: 0.8rem 0.5rem;
+            }
+
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+
+            .countdown-text {
+                font-size: 0.7rem;
+            }
+
+            .countdown-hero {
+                padding: 1.4rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .schedule-section {
+                padding: 1.4rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .checklist-section {
+                padding: 1.4rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .add-trip-section {
+                padding: 1.4rem;
+            }
+
+            .add-trip-form {
+                grid-template-columns: 1fr 1fr auto;
+                gap: 0.6rem;
+            }
+
+            .form-input {
+                min-width: 0;
+            }
+
+            .schedule-item {
+                padding: 0.8rem;
+                gap: 0.6rem;
+            }
+
+            .schedule-meta {
+                gap: 0.8rem;
+            }
+
+            .status-badge {
+                padding: 0.25rem 0.7rem;
+                font-size: 0.65rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.3rem;
+            }
+
+            .countdown-hero {
+                padding: 1.5rem;
+            }
+
+            .countdown-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-unit {
+                padding: 0.9rem 0.5rem;
+            }
+
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+
+            .countdown-text {
+                font-size: 0.6rem;
+                letter-spacing: 0px;
+            }
+
+            .trip-name {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1rem;
+            }
+
+            .schedule-item {
+                padding: 0.7rem;
+                flex-wrap: wrap;
+            }
+
+            .schedule-actions {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 0.5rem;
+            }
+
+            .add-trip-form {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .form-input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            .trip-name {
+                font-size: 1.1rem;
+            }
+
+            .trip-date {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="rcentral-body">
+    <!-- Navigation -->
+    <nav class="rcentral-nav">
+        <div class="rcentral-container">
+            <div class="rcentral-nav-content">
+                <div class="rcentral-nav-logo">
+                    <h2>R-CENTRAL</h2>
+                    <p class="rcentral-nav-subtitle">Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                </div>
+                <ul class="rcentral-nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#quiz-agenda">Quiz Agenda</a></li>
+                </ul>
+                <div class="rcentral-nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="rcentral-main">
+        <div class="rcentral-container">
+            <h1 class="page-title">Return Schedule</h1>
+
+            <!-- Countdown Hero -->
+            <div class="countdown-hero">
+                <div class="countdown-info">
+                    <div>
+                        <div class="countdown-label">Next Return Home</div>
+                        <div class="trip-name" id="nextTripName"><i class="fas fa-map-pin"></i> Loading...</div>
+                        <div class="trip-date" id="nextTripDate">Loading date...</div>
+                    </div>
+                    <div class="countdown-timer">
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="days">0</div>
+                            <div class="countdown-text">Days</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="hours">0</div>
+                            <div class="countdown-text">Hours</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="minutes">0</div>
+                            <div class="countdown-text">Minutes</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-value" id="seconds">0</div>
+                            <div class="countdown-text">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Packing Checklist (Hidden by default) -->
+            <div id="kelengkapan-container" style="display:none;">
+                <div class="checklist-section">
+                    <h2 class="checklist-title">
+                        <i class="fas fa-list-check"></i> Packing Checklist
+                    </h2>
+                    <ul class="checklist-list" id="kelengkapan-list"></ul>
+                    <div class="checklist-input-group">
+                        <input type="text" id="kelengkapan-input" class="checklist-input" placeholder="Add item...">
+                        <button id="kelengkapan-add" class="btn-add">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip Schedule -->
+            <div class="schedule-section">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; padding-bottom:1rem; border-bottom:1px solid rgba(125,211,252,0.1);">
+                    <div class="section-title" style="border:none; margin:0; padding:0;">
+                        <i class="fas fa-calendar-days"></i> All Trips
+                    </div>
+                    <button class="toggle-btn" id="toggle-kelengkapan" title="Toggle packing checklist">
+                        <i class="fa-solid fa-list-check" id="icon-show"></i>
+                        <i class="fa-solid fa-times" id="icon-hide" style="display:none;"></i>
+                    </button>
+                </div>
+
+                <!-- Upcoming Section -->
+                <div style="margin-bottom:1rem;">
+                    <div class="section-title" style="font-size:0.95rem; margin-bottom:0.6rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(125,211,252,0.2);">
+                        <i class="fas fa-clock" style="color:#a78bfa;"></i> Upcoming
+                    </div>
+                    <ul class="schedule-list" id="upcomingList"></ul>
+                </div>
+
+                <!-- Completed Section -->
+                <div style="margin-bottom:1rem;">
+                    <div class="section-title" style="font-size:0.95rem; margin-bottom:0.6rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(125,211,252,0.2);">
+                        <i class="fas fa-check-circle" style="color:#86efac;"></i> Completed
+                    </div>
+                    <ul class="schedule-list" id="completedList"></ul>
+                </div>
+
+                <!-- Missed Section -->
+                <div>
+                    <div class="section-title" style="font-size:0.95rem; margin-bottom:0.6rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(125,211,252,0.2);">
+                        <i class="fas fa-exclamation-circle" style="color:#fcd34d;"></i> Missed
+                    </div>
+                    <ul class="schedule-list" id="missedList"></ul>
+                </div>
+            </div>
+
+            <!-- Add Custom Trip -->
+            <div class="add-trip-section">
+                <h3 class="add-trip-title">
+                    <i class="fas fa-plus-circle"></i> Add Custom Trip
+                </h3>
+                <div class="add-trip-form">
+                    <input type="date" id="custom-date" class="form-input">
+                    <input type="time" id="custom-time" class="form-input">
+                    <input type="text" id="custom-name" class="form-input" placeholder="Trip name (optional)">
+                    <button id="add-custom" class="btn-submit">Add</button>
+                </div>
+                <div class="add-trip-help">Day of week auto-populates when added</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="rcentral-footer">
+        <div class="rcentral-container">
+            <div class="rcentral-footer-content">
+                <div class="rcentral-footer-main">
+                    <div class="rcentral-footer-logo">
+                        <h3>R-CENTRAL</h3>
+                        <p>Raffi's Creative Exchange Network, Tools, Reflections, And Links</p>
+                    </div>
+                    <div class="rcentral-footer-links">
+                        <div class="rcentral-footer-column">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#projects">Projects</a></li>
+                            </ul>
+                        </div>
+                        <div class="rcentral-footer-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#skills">Skills</a></li>
+                                <li><a href="#achievements">Achievements</a></li>
+                                <li><a href="#quiz-agenda">Quiz Agenda</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rcentral-social-section">
+                        <h4 class="rcentral-social-title">Connect With Me</h4>
+                        <div class="rcentral-social-icons">
+                            <a href="https://youtube.com/@raffizahrandhika" class="rcentral-social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://instagram.com/raffizahrandhika" class="rcentral-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://t.me/raffizahrandhika" class="rcentral-social-icon" title="Telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="https://tiktok.com/@raffizahrandhika" class="rcentral-social-icon" title="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378" class="rcentral-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rcentral-copyright">
+                <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const returnSchedule = [
+            {
+                id: 1,
+                name: "Return Home",
+                date: new Date("2025-09-01T07:00:00"), 
+                completed: false
+            }
+        ];
+
+        let kelengkapanBarang = JSON.parse(localStorage.getItem('kelengkapanBarang') || '[]');
+        let kelengkapanVisible = JSON.parse(localStorage.getItem('kelengkapanVisible') || 'false');
+
+        function renderKelengkapan() {
+            const list = document.getElementById('kelengkapan-list');
+            list.innerHTML = '';
+            if (kelengkapanBarang.length === 0) {
+                list.innerHTML = '<li class="empty-state"><i class="fas fa-inbox"></i> No items yet</li>';
+                return;
+            }
+            kelengkapanBarang.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.className = 'checklist-item';
+                li.innerHTML = `
+                    <input type="checkbox" class="checklist-checkbox" ${item.checked ? 'checked' : ''}>
+                    <span>${item.name}</span>
+                    <button class="checklist-delete" data-idx="${idx}" title="Delete"><i class="fas fa-trash"></i></button>
+                `;
+                li.addEventListener('click', function(e) {
+                    if (e.target.closest('.checklist-delete')) return;
+                    kelengkapanBarang[idx].checked = !kelengkapanBarang[idx].checked;
+                    saveKelengkapan();
+                    renderKelengkapan();
+                });
+                li.querySelector('.checklist-delete').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    kelengkapanBarang.splice(idx, 1);
+                    saveKelengkapan();
+                    renderKelengkapan();
+                });
+                list.appendChild(li);
+            });
+        }
+
+        function saveKelengkapan() {
+            localStorage.setItem('kelengkapanBarang', JSON.stringify(kelengkapanBarang));
+        }
+
+        document.getElementById('kelengkapan-add').addEventListener('click', function() {
+            const input = document.getElementById('kelengkapan-input');
+            const val = input.value.trim();
+            if (val) {
+                kelengkapanBarang.push({name: val, checked: false});
+                saveKelengkapan();
+                renderKelengkapan();
+                input.value = '';
+            }
+        });
+
+        function applyKelengkapanVisibility() {
+            const el = document.getElementById('kelengkapan-container');
+            el.style.display = kelengkapanVisible ? 'block' : 'none';
+            document.getElementById('icon-show').style.display = kelengkapanVisible ? 'none' : 'inline-block';
+            document.getElementById('icon-hide').style.display = kelengkapanVisible ? 'inline-block' : 'none';
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const upcomingTrips = returnSchedule
+                .filter(trip => !trip.completed && trip.date > now)
+                .sort((a, b) => a.date - b.date);
+            
+            if (upcomingTrips.length > 0) {
+                const nextTrip = upcomingTrips[0];
+                const timeRemaining = nextTrip.date - now;
+                
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+                
+                document.getElementById('nextTripName').innerHTML = `<i class="fas fa-map-pin"></i> ${nextTrip.name}`;
+                document.getElementById('nextTripDate').innerHTML = `<i class="fas fa-calendar"></i> ${formatDay(nextTrip.date)}, ${formatDate(nextTrip.date)} at ${formatTime(nextTrip.date)}`;
+            } else {
+                document.getElementById('days').textContent = '—';
+                document.getElementById('hours').textContent = '—';
+                document.getElementById('minutes').textContent = '—';
+                document.getElementById('seconds').textContent = '—';
+                document.getElementById('nextTripName').innerHTML = '<i class="fas fa-calendar-plus"></i> No trips scheduled';
+                document.getElementById('nextTripDate').textContent = 'Add a trip to get started';
+            }
+        }
+
+        function formatDay(date) {
+            return date.toLocaleDateString('en-US', { weekday: 'long' });
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function renderSchedule() {
+            const upcomingList = document.getElementById('upcomingList');
+            const completedList = document.getElementById('completedList');
+            const missedList = document.getElementById('missedList');
+            
+            upcomingList.innerHTML = '';
+            completedList.innerHTML = '';
+            missedList.innerHTML = '';
+            
+            const now = new Date();
+            returnSchedule.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            returnSchedule.forEach(trip => {
+                const li = document.createElement('li');
+                li.className = 'schedule-item';
+                
+                let statusClass, statusText;
+                if (trip.completed) {
+                    statusClass = 'status-completed';
+                    statusText = 'Done';
+                } else if (trip.date < now) {
+                    statusClass = 'status-missed';
+                    statusText = 'Missed';
+                } else {
+                    statusClass = 'status-upcoming';
+                    statusText = 'Upcoming';
+                }
+                
+                li.innerHTML = `
+                    <input type="checkbox" class="schedule-checkbox" ${trip.completed ? 'checked' : ''} style="pointer-events:none;">
+                    <div class="schedule-content">
+                        <div class="schedule-name">${trip.name}</div>
+                        <div class="schedule-meta">
+                            <span><i class="fas fa-calendar"></i> ${formatDate(trip.date)}</span>
+                            <span><i class="fas fa-clock"></i> ${formatTime(trip.date)}</span>
+                        </div>
+                    </div>
+                    <div class="schedule-actions">
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                        ${statusClass === 'status-upcoming' ? `<button class="btn-delete" data-id="${trip.id}" title="Delete"><i class="fas fa-trash"></i></button>` : ''}
+                    </div>
+                `;
+                
+                li.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-delete')) return;
+                    trip.completed = !trip.completed;
+                    saveToLocalStorage();
+                    renderSchedule();
+                    updateCountdown();
+                });
+                
+                const delBtn = li.querySelector('.btn-delete');
+                if (delBtn) {
+                    delBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = returnSchedule.findIndex(r => r.id === parseInt(this.getAttribute('data-id'), 10));
+                        if (idx !== -1) {
+                            returnSchedule.splice(idx, 1);
+                            saveToLocalStorage();
+                            renderSchedule();
+                            updateCountdown();
+                        }
+                    });
+                }
+
+                if (trip.completed) {
+                    completedList.appendChild(li);
+                } else if (trip.date < now) {
+                    missedList.appendChild(li);
+                } else {
+                    upcomingList.appendChild(li);
+                }
+            });
+
+            if (upcomingList.children.length === 0) upcomingList.innerHTML = '<li class="empty-state"><i class="fas fa-check"></i> No upcoming trips</li>';
+            if (completedList.children.length === 0) completedList.innerHTML = '<li class="empty-state"><i class="fas fa-calendar-check"></i> None yet</li>';
+            if (missedList.children.length === 0) missedList.innerHTML = '<li class="empty-state"><i class="fas fa-hourglass-end"></i> None missed</li>';
+        }
+
+        function saveToLocalStorage() {
+            const serializable = returnSchedule.map(t => ({ ...t, date: t.date instanceof Date ? t.date.toISOString() : t.date }));
+            localStorage.setItem('returnSchedule', JSON.stringify(serializable));
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('returnSchedule');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                returnSchedule.length = 0;
+                parsed.forEach(s => {
+                    returnSchedule.push({ id: s.id, name: s.name, date: new Date(s.date), completed: !!s.completed });
+                });
+            }
+        }
+
+        function init() {
+            loadFromLocalStorage();
+            renderSchedule();
+            updateCountdown();
+            renderKelengkapan();
+            applyKelengkapanVisibility();
+            
+            setInterval(updateCountdown, 1000);
+
+            document.getElementById('toggle-kelengkapan').addEventListener('click', function() {
+                kelengkapanVisible = !kelengkapanVisible;
+                localStorage.setItem('kelengkapanVisible', JSON.stringify(kelengkapanVisible));
+                applyKelengkapanVisibility();
+            });
+
+            document.getElementById('add-custom').addEventListener('click', function() {
+                const dateInput = document.getElementById('custom-date').value;
+                const timeInput = document.getElementById('custom-time').value || '00:00';
+                const nameInput = document.getElementById('custom-name').value.trim() || 'New Trip';
+
+                if (!dateInput) {
+                    alert('Please select a date.');
+                    return;
+                }
+
+                const dt = new Date(dateInput + 'T' + timeInput + ':00');
+                const newId = returnSchedule.reduce((max, t) => Math.max(max, t.id), 0) + 1;
+                
+                returnSchedule.push({
+                    id: newId,
+                    name: nameInput,
+                    date: dt,
+                    completed: false
+                });
+                
+                saveToLocalStorage();
+                renderSchedule();
+                updateCountdown();
+
+                document.getElementById('custom-date').value = '';
+                document.getElementById('custom-time').value = '';
+                document.getElementById('custom-name').value = '';
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
