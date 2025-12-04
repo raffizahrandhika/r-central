@@ -199,4 +199,81 @@ document.addEventListener('DOMContentLoaded', function() {
     if (homeLink && !document.querySelector('.rcentral-nav-menu a.active')) {
         homeLink.classList.add('active');
     }
+    
+    // Initialize certificate display with newest first
+    initializeCertificates();
+    
+    // Update certificate count
+    updateCertificateCount();
 });
+
+// Global function for certificate toggle
+let certificatesExpanded = false;
+
+function toggleCertificates() {
+    const cards = document.querySelectorAll('.rcentral-achievement-card');
+    const btn = document.getElementById('toggleCertificatesBtn');
+    
+    certificatesExpanded = !certificatesExpanded;
+    
+    if (certificatesExpanded) {
+        // Show all cards
+        cards.forEach(card => {
+            card.classList.add('visible');
+        });
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i> Tutup';
+    } else {
+        // Show only first 3 (which are the newest due to reverse order)
+        cards.forEach((card, index) => {
+            if (index < 3) {
+                card.classList.add('visible');
+            } else {
+                card.classList.remove('visible');
+            }
+        });
+        btn.innerHTML = '<i class="fas fa-chevron-down"></i> Lihat Sertifikat Lainnya';
+        
+        // Scroll to achievements section
+        const achievementsSection = document.getElementById('achievements');
+        if (achievementsSection) {
+            achievementsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+}
+
+function initializeCertificates() {
+    const cards = document.querySelectorAll('.rcentral-achievement-card');
+    
+    // Reverse the order of cards (newest first)
+    const grid = document.querySelector('.rcentral-achievements-grid');
+    const cardsArray = Array.from(cards);
+    
+    // Reverse array to show newest first
+    cardsArray.reverse();
+    
+    // Clear grid and re-append in reverse order
+    grid.innerHTML = '';
+    cardsArray.forEach(card => {
+        grid.appendChild(card);
+    });
+    
+    // Show only first 3 cards by default
+    const allCards = document.querySelectorAll('.rcentral-achievement-card');
+    allCards.forEach((card, index) => {
+        if (index < 3) {
+            card.classList.add('visible');
+        }
+    });
+    
+    certificatesExpanded = false;
+}
+
+function updateCertificateCount() {
+    const cards = document.querySelectorAll('.rcentral-achievement-card');
+    const countElement = document.getElementById('certificateCount');
+    const totalCertificates = cards.length;
+    
+    if (countElement) {
+        countElement.textContent = `Total ${totalCertificates} ${totalCertificates === 1 ? 'certificate' : 'certificates'}`;
+    }
+}
