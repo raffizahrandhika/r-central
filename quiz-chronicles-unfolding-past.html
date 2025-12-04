@@ -11,28 +11,153 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Additional Styles for Quiz Chronicles Page */
+    /* Redesigned Quiz Chronicles Page */
     .rcentral-main {
       min-height: calc(100vh - 200px);
-      padding: 2rem 0;
+      padding: 3rem 0;
     }
 
     .rcentral-content-section {
       margin-bottom: 3rem;
     }
 
-    .quiz-content-card {
+    /* Hero Section */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(125, 211, 252, 0.2);
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(125, 211, 252, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-icon {
+      font-size: 3.5rem;
+      color: #7dd3fc;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(125, 211, 252, 0.2);
+      border: 1px solid rgba(125, 211, 252, 0.4);
+      color: #7dd3fc;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(125, 211, 252, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #7dd3fc;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-desc {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* Coming Soon Section */
+    .coming-soon-section {
       background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
       border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(148, 163, 184, 0.1);
-      margin-top: 2rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(125, 211, 252, 0.15);
       position: relative;
       overflow: hidden;
     }
 
-    .quiz-content-card::before {
+    .coming-soon-section::before {
       content: '';
       position: absolute;
       top: 0;
@@ -40,145 +165,128 @@
       right: 0;
       height: 6px;
       background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-      border-radius: 20px 20px 0 0;
-    }
-
-    .quiz-content-card h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-      color: #f8fafc;
-    }
-
-    .quiz-content-card h4 {
-      font-size: 1.18rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #7dd3fc;
-    }
-
-    .quiz-content-card ul {
-      margin-bottom: 1.1rem;
-      padding-left: 1.5rem;
-    }
-
-    .quiz-content-card li {
-      margin-bottom: 0.5rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-
-    .quiz-content-card b {
-      color: #f8fafc;
-      font-weight: 600;
-    }
-
-    .coming-soon-container {
-      text-align: center;
-      padding: 4rem 2rem;
     }
 
     .coming-soon-icon {
-      font-size: 4rem;
+      font-size: 5rem;
       color: #7dd3fc;
       margin-bottom: 1.5rem;
       display: inline-block;
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
     }
 
     .coming-soon-title {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.2rem;
+      font-weight: 800;
       color: #f8fafc;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
     }
 
     .coming-soon-text {
-      font-size: 1.1rem;
-      color: #94a3b8;
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.6;
+      font-size: 1rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
     }
 
-    .countdown-container {
-      margin-top: 2rem;
-      padding: 2rem;
-      background: rgba(125, 211, 252, 0.1);
-      border-radius: 15px;
+    /* Launch Countdown */
+    .launch-countdown {
+      background: rgba(125, 211, 252, 0.08);
       border: 1px solid rgba(125, 211, 252, 0.3);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
     }
 
     .countdown-title {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #7dd3fc;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .countdown-timer {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
       margin-bottom: 1.5rem;
-    }
-
-    .countdown-item {
-      text-align: center;
-      min-width: 80px;
-    }
-
-    .countdown-number {
-      font-size: 2rem;
       font-weight: 700;
-      color: #7dd3fc;
-      background: rgba(125, 211, 252, 0.2);
-      padding: 0.5rem;
-      border-radius: 10px;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .countdown-label {
-      font-size: 0.8rem;
-      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .progress-container {
-      margin-top: 2rem;
+    .countdown-timer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .progress-text {
+    .countdown-item {
+      text-align: center;
+    }
+
+    .countdown-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #7dd3fc;
+      background: rgba(125, 211, 252, 0.15);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 0.7rem;
+      display: block;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Progress Bar */
+    .progress-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(125, 211, 252, 0.2);
+    }
+
+    .progress-label {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
-      color: #94a3b8;
+      align-items: center;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
       font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .progress-percentage {
+      color: #7dd3fc;
+      font-size: 1.1rem;
     }
 
     .progress-bar {
-      height: 8px;
-      background: rgba(148, 163, 184, 0.2);
-      border-radius: 4px;
+      height: 10px;
+      background: rgba(148, 163, 184, 0.15);
+      border-radius: 10px;
       overflow: hidden;
+      border: 1px solid rgba(125, 211, 252, 0.2);
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-      border-radius: 4px;
-      width: 25%;
+      background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
+      border-radius: 10px;
+      width: 35%;
       position: relative;
-      transition: width 0.5s ease;
+      box-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
     }
 
     .progress-fill::after {
@@ -188,7 +296,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       animation: shimmer 2s infinite;
     }
 
@@ -196,136 +304,187 @@
       0% {
         transform: translateX(-100%);
       }
-
       100% {
         transform: translateX(100%);
       }
     }
 
-    .notify-button {
+    /* CTA Buttons */
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cta-button {
       display: inline-flex;
       align-items: center;
-      gap: 0.7em;
-      padding: 0.8em 2em;
-      font-size: 1.08rem;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #fff;
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
+      cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 1.5rem;
+      font-family: 'Nunito', sans-serif;
     }
 
-    .notify-button:hover {
+    .cta-button-primary {
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
+    }
+
+    .cta-button-primary:hover {
       background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(125, 211, 252, 0.4);
     }
 
-    /* Mobile Responsive Styles */
+    .cta-button-secondary {
+      background: transparent;
+      color: #7dd3fc;
+      border: 2px solid rgba(125, 211, 252, 0.4);
+    }
+
+    .cta-button-secondary:hover {
+      background: rgba(125, 211, 252, 0.1);
+      border-color: #7dd3fc;
+      transform: translateY(-3px);
+    }
+
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-      .rcentral-social-icons {
-        gap: 0.7rem;
-      }
-
       .rcentral-main {
-        padding: 1.5rem 0;
-        min-height: calc(100vh - 180px);
+        padding: 2rem 0;
       }
 
-      .quiz-content-card {
-        padding: 1.5rem;
-        margin-top: 1.5rem;
+      .hero-banner {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
       }
 
-      .coming-soon-container {
-        padding: 3rem 1rem;
+      .hero-title {
+        font-size: 1.8rem;
       }
 
-      .coming-soon-title {
-        font-size: 1.5rem;
-      }
-
-      .coming-soon-text {
+      .hero-subtitle {
         font-size: 1rem;
       }
 
-      .countdown-timer {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        /* 4 kolom sama rata */
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        width: 100%;
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
-      .countdown-item {
-        min-width: auto;
-        flex: none;
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.1rem;
+      }
+
+      .coming-soon-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .coming-soon-icon {
+        font-size: 3.5rem;
+      }
+
+      .coming-soon-title {
+        font-size: 1.6rem;
+      }
+
+      .countdown-timer {
+        gap: 0.7rem;
       }
 
       .countdown-number {
-        font-size: 1.3rem;
-        padding: 0.4rem;
+        font-size: 1.5rem;
+        padding: 0.8rem;
       }
 
       .countdown-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
       }
 
-      .notify-button {
+      .cta-buttons {
+        gap: 0.8rem;
+      }
+
+      .cta-button {
+        padding: 0.85rem 1.5rem;
         font-size: 0.95rem;
-        padding: 0.7em 1.5em;
-      }
-
-      .rcentral-section-title {
-        font-size: 1.5rem;
       }
     }
 
     @media (max-width: 480px) {
-      .quiz-content-card {
-        padding: 1.2rem;
+      .hero-banner {
+        padding: 1.5rem;
       }
 
-      .coming-soon-container {
-        padding: 2rem 1rem;
+      .hero-title {
+        font-size: 1.5rem;
+      }
+
+      .hero-icon {
+        font-size: 2.5rem;
+      }
+
+      .coming-soon-section {
+        padding: 1.5rem;
+      }
+
+      .coming-soon-icon {
+        font-size: 3rem;
       }
 
       .coming-soon-title {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
 
       .coming-soon-text {
         font-size: 0.9rem;
       }
 
-      .countdown-container {
-        padding: 1.5rem;
-      }
-
       .countdown-timer {
-        flex-wrap: wrap;
-      }
-
-      .countdown-item {
-        min-width: 50px;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .countdown-number {
-        font-size: 1.2rem;
-      }
-
-      .notify-button {
-        font-size: 0.9rem;
-        padding: 0.6em 1.2em;
-      }
-
-      .rcentral-section-title {
         font-size: 1.3rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .cta-button {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      /* Ensure anchors and buttons render the same when borders are present */
+      .cta-button, .cta-button-primary, .cta-button-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
     }
   </style>
@@ -347,59 +506,102 @@
   <!-- Main Content -->
   <main class="rcentral-main">
     <div class="rcentral-container">
+      <!-- Hero Section -->
       <section class="rcentral-content-section">
-        <h2 class="rcentral-section-title">Quiz Chronicles - The Unfolding Past</h2>
-        <div class="rcentral-card">
-          <p>Kisah dan pengetahuan masa lalu dalam bentuk kuis yang menarik. Jelajahi sejarah melalui tantangan
-            interaktif!</p>
+        <div class="hero-banner">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <i class="fas fa-clock"></i> Coming January 2026
+            </div>
+            <h1 class="hero-title">Quiz Chronicles</h1>
+            <p class="hero-subtitle">Jelajahi perjalanan sejarah dunia melalui kuis interaktif yang menantang dan edukatif</p>
+          </div>
         </div>
+      </section>
 
-        <div class="quiz-content-card">
-          <div class="coming-soon-container">
-            <div class="coming-soon-icon">
-              <i class="fas fa-history"></i>
+      <!-- Features Section -->
+      <section class="rcentral-content-section">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-globe"></i>
             </div>
-            <h3 class="coming-soon-title">Coming Soon - January 2026</h3>
-            <p class="coming-soon-text">
-              Quiz Chronicles - The Unfolding Past sedang dalam persiapan.
-              Bersiaplah untuk menjelajahi perjalanan sejarah melalui kuis interaktif yang menarik!
-            </p>
+            <h3 class="feature-title">Kisah Dunia</h3>
+            <p class="feature-desc">Pelajari peristiwa-peristiwa bersejarah dari berbagai belahan dunia dalam satu platform interaktif.</p>
+          </div>
 
-            <div class="countdown-container">
-              <div class="countdown-title">Launching In:</div>
-              <div class="countdown-timer">
-                <div class="countdown-item">
-                  <span class="countdown-number" id="days">00</span>
-                  <span class="countdown-label">Hari</span>
-                </div>
-                <div class="countdown-item">
-                  <span class="countdown-number" id="hours">00</span>
-                  <span class="countdown-label">Jam</span>
-                </div>
-                <div class="countdown-item">
-                  <span class="countdown-number" id="minutes">00</span>
-                  <span class="countdown-label">Menit</span>
-                </div>
-                <div class="countdown-item">
-                  <span class="countdown-number" id="seconds">00</span>
-                  <span class="countdown-label">Detik</span>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3 class="feature-title">Tantangan Menarik</h3>
+            <p class="feature-desc">Uji pengetahuan Anda dengan pertanyaan yang dirancang khusus untuk mengasah kemampuan berpikirmu.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3 class="feature-title">Raih Pencapaian</h3>
+            <p class="feature-desc">Kumpulkan badge dan sertifikat sambil menyelesaikan berbagai level tantangan sejarah.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Coming Soon Section -->
+      <section class="rcentral-content-section">
+        <div class="coming-soon-section">
+          <div class="coming-soon-icon">
+            <i class="fas fa-hourglass-end"></i>
+          </div>
+          <h2 class="coming-soon-title">Sedang Dikembangkan</h2>
+          <p class="coming-soon-text">
+            Quiz Chronicles sedang dalam tahap pengembangan intensif. Tim kami bekerja keras untuk menciptakan pengalaman belajar yang luar biasa. Bersiaplah untuk petualangan sejarah yang tak terlupakan!
+          </p>
+
+          <!-- Countdown -->
+          <div class="launch-countdown">
+            <div class="countdown-title">Peluncuran Dalam:</div>
+            <div class="countdown-timer">
+              <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Hari</span>
               </div>
-
-              <div class="progress-container">
-                <div class="progress-text">
-                  <span>Development Progress</span>
-                  <span>25%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill"></div>
-                </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Jam</span>
+              </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Menit</span>
+              </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Detik</span>
               </div>
             </div>
 
-            <a href="#" class="notify-button">
+            <!-- Progress Section -->
+            <div class="progress-section">
+              <div class="progress-label">
+                <span>Development Progress</span>
+                <span class="progress-percentage">35%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="cta-buttons">
+            <button class="cta-button cta-button-primary" id="notify-btn">
               <i class="fas fa-bell"></i>
-              Notify Me When Ready
+              Beritahu Saya
+            </button>
+            <a href="index.html#quiz-agenda" class="cta-button cta-button-secondary">
+              <i class="fas fa-arrow-left"></i>
+              Kembali
             </a>
           </div>
         </div>
@@ -497,7 +699,7 @@
     updateCountdown(); // Initial call
 
     // Notify button functionality
-    document.querySelector('.notify-button').addEventListener('click', function (e) {
+    document.getElementById('notify-btn').addEventListener('click', function (e) {
       e.preventDefault();
       alert('Terima kasih! Kami akan memberi tahu Anda ketika Quiz Chronicles sudah siap diluncurkan.');
     });
