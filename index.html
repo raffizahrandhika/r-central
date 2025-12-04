@@ -55,7 +55,8 @@
                 </div>
                 <div class="rcentral-hero-image">
                     <div class="rcentral-hero-avatar">
-                        <img src="https://res.cloudinary.com/dy6sxsb26/image/upload/v1762686286/hero_section_raffi_xnolio.png" alt="rcentral-hero-avatar" class="rcentral-hero-img">
+                        <img src="https://res.cloudinary.com/dy6sxsb26/image/upload/v1762686286/hero_section_raffi_xnolio.png"
+                            alt="rcentral-hero-avatar" class="rcentral-hero-img">
                     </div>
                 </div>
             </div>
@@ -131,7 +132,7 @@
                     <h3>Jadwal Pulang</h3>
                     <p>Schedule management tool to help organize and track important timelines.</p>
                     <div class="rcentral-project-links">
-                        <a href="https://raffizahrandhika.github.io/jadwal-pulang/" class="rcentral-project-link">View
+                        <a href="homecoming-schedule.html" class="rcentral-project-link">View
                             Project</a>
                     </div>
                 </div>
@@ -359,6 +360,7 @@
     <section id="achievements" class="rcentral-achievements">
         <div class="rcentral-container">
             <h2 class="rcentral-section-title">Achievements & Certifications</h2>
+            <p class="rcentral-achievements-count" id="certificateCount"></p>
             <div class="rcentral-achievements-grid">
                 <!-- Sertifikat 1 -->
                 <div class="rcentral-achievement-card">
@@ -528,6 +530,37 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Sertifikat 8 - MUTION Appreciation Certificate -->
+                <div class="rcentral-achievement-card">
+                    <div class="rcentral-achievement-preview">
+                        <div class="rcentral-certificate-placeholder">
+                            <i class="fas fa-award"></i>
+                        </div>
+                    </div>
+                    <div class="rcentral-achievement-content">
+                        <h3>MUTION Appreciation Certificate</h3>
+                        <p>Received appreciation for spirit and contribution in MUTION activity. Recognized for
+                            dedication and enthusiasm in participating in organizational activities of Forum Mahasiswa
+                            Islam FMIPA UNNES.</p>
+                        <div class="rcentral-achievement-meta">
+                            <span class="rcentral-achievement-date">November 2025</span>
+                            <span class="rcentral-achievement-issuer">Forum Mahasiswa Islam FMIPA UNNES</span>
+                        </div>
+                        <div class="rcentral-achievement-actions">
+                            <button class="rcentral-certificate-btn" onclick="previewCertificate(8)">
+                                <i class="fas fa-eye"></i>
+                                Preview Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="rcentral-toggle-certificates-btn" id="toggleCertificatesBtn" onclick="toggleCertificates()">
+                    <i class="fas fa-chevron-down"></i>
+                    Lihat Sertifikat Lainnya
+                </button>
             </div>
         </div>
     </section>
@@ -756,6 +789,16 @@
                 issuer: "Universitas Negeri Semarang",
                 type: "Committee Certificate",
                 description: "Served as committee member for the 'Bedah Skripsi dan Tugas Akhir' event with the theme 'Write the Paper, Win the Future' organized by Mathematics Study Club Faculty of Mathematics and Natural Sciences Universitas Negeri Semarang.",
+                verifyUrl: "#"
+            },
+            8: {
+                title: "MUTION Appreciation Certificate",
+                subtitle: "Forum Mahasiswa Islam FMIPA",
+                date: "November 2025",
+                image: "https://res.cloudinary.com/dy6sxsb26/image/upload/v1764723135/M_Raffi_Z_jqocmb.png",
+                issuer: "Forum Mahasiswa Islam FMIPA UNNES",
+                type: "Appreciation Certificate",
+                description: "Received appreciation for spirit and contribution in MUTION activity. Recognized for dedication and enthusiasm in participating in organizational activities of Forum Mahasiswa Islam FMIPA UNNES. Awarded by Mas'ul FMI periode 24/25 and Head of Kaderisasi Department.",
                 verifyUrl: "#"
             }
         };
