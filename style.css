@@ -45,9 +45,13 @@ body {
 
 .rcentral-nav-logo h2 {
     font-weight: 700;
-    color: #f8fafc;
+    color: #7dd3fc;
     font-size: 1.5rem;
     margin: 0;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .rcentral-nav-subtitle {
@@ -175,7 +179,7 @@ body {
 
 .rcentral-hero-description {
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: #e2e8f0;
     margin-bottom: 2rem;
     max-width: 500px;
     line-height: 1.7;
@@ -907,15 +911,27 @@ body {
 
 /* Footer */
 .rcentral-footer {
-    background: #0f172a;
-    padding: 3rem 0 2rem 0;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, #0f172a 50%, #050a16 100%);
+    padding: 4rem 0 2rem 0;
+    border-top: 2px solid rgba(125, 211, 252, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.rcentral-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.5), transparent);
 }
 
 .rcentral-footer-content {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 3rem;
     margin-bottom: 2rem;
 }
 
@@ -923,7 +939,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 8rem;
 }
 
 .rcentral-footer-logo {
@@ -934,27 +950,43 @@ body {
     font-size: 1.8rem;
     color: #f8fafc;
     margin-bottom: 0.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .rcentral-footer-logo p {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    max-width: 300px;
-    text-align: justify;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    max-width: 320px;
+    text-align: left;
+    line-height: 1.7;
+    font-weight: 300;
 }
 
 .rcentral-footer-links {
     display: flex;
-    gap: 3rem;
+    gap: 6rem;
+    flex: 2;
+    margin-left: auto;
 }
 
 .rcentral-footer-column h4 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #f8fafc;
-    margin-bottom: 1rem;
-    font-weight: 600;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.rcentral-footer-column h4::after {
+    display: none;
 }
 
 .rcentral-footer-column ul {
@@ -964,18 +996,35 @@ body {
 }
 
 .rcentral-footer-column li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .rcentral-footer-column a {
     color: #94a3b8;
     text-decoration: none;
-    transition: color 0.2s;
-    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    position: relative;
+    display: inline-block;
+}
+
+.rcentral-footer-column a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #7dd3fc, #38bdf8);
+    transition: width 0.3s ease;
 }
 
 .rcentral-footer-column a:hover {
     color: #7dd3fc;
+}
+
+.rcentral-footer-column a:hover::before {
+    width: 100%;
 }
 
 .rcentral-social-section {
@@ -983,32 +1032,46 @@ body {
 }
 
 .rcentral-social-title {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: #f8fafc;
     margin-bottom: 1.5rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .rcentral-social-icons {
     display: flex;
     justify-content: flex-start;
-    gap: 1.2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .rcentral-social-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     color: white;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
-    background: rgba(148, 163, 184, 0.1);
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.1), rgba(56, 189, 248, 0.05));
     text-decoration: none;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.rcentral-social-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .rcentral-social-icon:focus,
@@ -1017,24 +1080,29 @@ body {
 }
 
 .rcentral-social-icon:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.1);
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     text-decoration: none;
+    box-shadow: 0 8px 20px rgba(125, 211, 252, 0.3);
+    border-color: transparent;
 }
 
 .rcentral-copyright {
     text-align: center;
     padding-top: 1rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
 }
 
 .rcentral-copyright p {
     color: #64748b;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.5px;
-    margin: 0.5rem 0;
-    text-align: center !important;
+    margin: 0;
+    text-align: center;
+    font-weight: 300;
 }
+
+
 
 /* Certificate Preview Modal - REVISED WITH CAPTION */
 .modal {
@@ -1211,7 +1279,7 @@ body {
 }
 
 .detail-description {
-    color: #cbd5e1;
+    color: #e2e8f0;
     font-size: 0.9rem;
     line-height: 1.5;
 }
@@ -1249,12 +1317,18 @@ body {
     
     .rcentral-footer-main {
         flex-direction: column;
-        gap: 2rem;
+        gap: 2.5rem;
+    }
+    
+    .rcentral-footer-logo {
+        text-align: center;
     }
     
     .rcentral-footer-links {
         justify-content: space-between;
         width: 100%;
+        flex-direction: column;
+        gap: 2rem;
     }
     
     .rcentral-social-section {
@@ -1490,21 +1564,27 @@ body {
     
     /* Footer */
     .rcentral-footer-logo h3 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+    }
+    
+    .rcentral-footer-logo {
+        text-align: center;
     }
     
     .rcentral-footer-logo p {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        max-width: 100%;
+        text-align: center;
     }
     
     .rcentral-social-title {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     
     .rcentral-footer-links {
         display: flex;
-        flex-direction: row;
-        gap: 3rem;
+        flex-direction: column;
+        gap: 2rem;
         width: 100%;
         justify-content: center;
         align-items: flex-start;
@@ -1527,7 +1607,7 @@ body {
     }
     
     .rcentral-copyright p {
-        text-align: center !important;
+        text-align: center;
     }
 }
 
@@ -1715,6 +1795,14 @@ body {
     
     .rcentral-footer-main {
         gap: 1.5rem;
+    }
+    
+    .rcentral-footer-logo {
+        text-align: center;
+    }
+    
+    .rcentral-footer-logo p {
+        text-align: center;
     }
     
     .rcentral-social-icons {
