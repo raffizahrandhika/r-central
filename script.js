@@ -200,16 +200,195 @@ document.addEventListener('DOMContentLoaded', function() {
         homeLink.classList.add('active');
     }
     
-    // Initialize certificate display with newest first
-    initializeCertificates();
+    // Fetch and initialize certificates from CSV
+    loadCertificatesFromCSV();
+});
+
+// Global variable to store certificates data
+let certificatesData = {};
+let certificatesExpanded = false;
+
+// Fetch CSV data from Google Sheets
+async function loadCertificatesFromCSV() {
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8YyGPAC4er9r6d5zpeoWomBXrcVHmnIJpx8HIqxhr7t_qWvC2zg3Fc2fcP_XFcXXT_eL40vdDDCdU/pub?gid=0&single=true&output=csv';
     
-    // Update certificate count
-    updateCertificateCount();
+    try {
+        const response = await fetch(csvUrl);
+        const csv = await response.text();
+        
+        // Parse CSV
+        certificatesData = parseCSV(csv);
+        
+        // Generate HTML cards
+        generateCertificateCards(certificatesData);
+        
+        // Initialize certificate display
+        initializeCertificates();
+        
+        // Update certificate count
+        updateCertificateCount();
+    } catch (error) {
+        console.error('Error loading certificates:', error);
+    }
+}
+
+// Parse CSV string to object
+function parseCSV(csv) {
+    const lines = csv.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim());
+    const certificates = {};
+    
+    for (let i = 1; i < lines.length; i++) {
+        // Handle CSV parsing with quoted values
+        const values = parseCSVLine(lines[i]);
+        
+        if (values.length === 0 || !values[0]) continue;
+        
+        const id = values[0].trim();
+        const cert = {
+            id: id,
+            title: values[1] ? values[1].trim() : '',
+            titleIcon: values[2] ? values[2].trim() : 'fa-file-alt',
+            subtitle: values[3] ? values[3].trim() : '',
+            date: values[4] ? values[4].trim() : '',
+            imageUrl: values[5] ? values[5].trim() : '',
+            issuer: values[6] ? values[6].trim() : '',
+            type: values[7] ? values[7].trim() : '',
+            description: values[8] ? values[8].trim() : '',
+            verifyUrl: values[9] ? values[9].trim() : '#'
+        };
+        
+        certificates[id] = cert;
+    }
+    
+    return certificates;
+}
+
+// Parse CSV line handling quotes
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let insideQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            insideQuotes = !insideQuotes;
+        } else if (char === ',' && !insideQuotes) {
+            result.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    
+    result.push(current);
+    return result;
+}
+
+// Generate certificate cards from data
+function generateCertificateCards(certificatesData) {
+    const grid = document.querySelector('.rcentral-achievements-grid');
+    
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+    
+    // Sort by ID descending (newest first)
+    const sortedIds = Object.keys(certificatesData).sort().reverse();
+    
+    sortedIds.forEach(id => {
+        const cert = certificatesData[id];
+        
+        // Clean icon class - remove spaces and ensure fa- prefix
+        let iconClass = cert.titleIcon.replace(/\s+/g, '-').toLowerCase();
+        if (!iconClass.startsWith('fa-')) {
+            iconClass = 'fa-' + iconClass;
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'rcentral-achievement-card';
+        card.innerHTML = `
+            <div class="rcentral-achievement-preview">
+                <div class="rcentral-certificate-placeholder">
+                    <i class="fas ${iconClass}"></i>
+                </div>
+            </div>
+            <div class="rcentral-achievement-content">
+                <h3>${cert.title}</h3>
+                <p>${cert.description}</p>
+                <div class="rcentral-achievement-meta">
+                    <span class="rcentral-achievement-date">${cert.date}</span>
+                    <span class="rcentral-achievement-issuer">${cert.issuer}</span>
+                </div>
+                <div class="rcentral-achievement-actions">
+                    <button class="rcentral-certificate-btn" onclick="previewCertificate('${id}')">
+                        <i class="fas fa-eye"></i>
+                        Preview Certificate
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+}
+
+// Certificate Preview Function
+function previewCertificate(certificateId) {
+    const modal = document.getElementById('certificateModal');
+    const certificate = certificatesData[certificateId];
+
+    if (!certificate) {
+        console.error('Certificate not found:', certificateId);
+        return;
+    }
+
+    // Update modal content
+    document.getElementById('modalCertificateTitle').textContent = certificate.title;
+    document.getElementById('modalCertificateSubtitle').textContent = certificate.subtitle;
+    document.getElementById('modalCertificateDate').textContent = certificate.date;
+    document.getElementById('certificateImage').src = certificate.imageUrl;
+    document.getElementById('detailIssuer').textContent = certificate.issuer;
+    document.getElementById('detailDate').textContent = certificate.date;
+    document.getElementById('detailType').textContent = certificate.type;
+    document.getElementById('detailDescription').textContent = certificate.description;
+
+    const verifyLink = document.getElementById('verificationLink');
+    verifyLink.href = certificate.verifyUrl;
+    if (certificate.verifyUrl === '#' || !certificate.verifyUrl) {
+        verifyLink.style.display = 'none';
+    } else {
+        verifyLink.style.display = 'inline-flex';
+    }
+
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+    const modal = document.getElementById('certificateModal');
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+}
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+    const modal = document.getElementById('certificateModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
 });
 
 // Global function for certificate toggle
-let certificatesExpanded = false;
-
 function toggleCertificates() {
     const cards = document.querySelectorAll('.rcentral-achievement-card');
     const btn = document.getElementById('toggleCertificatesBtn');
@@ -244,22 +423,8 @@ function toggleCertificates() {
 function initializeCertificates() {
     const cards = document.querySelectorAll('.rcentral-achievement-card');
     
-    // Reverse the order of cards (newest first)
-    const grid = document.querySelector('.rcentral-achievements-grid');
-    const cardsArray = Array.from(cards);
-    
-    // Reverse array to show newest first
-    cardsArray.reverse();
-    
-    // Clear grid and re-append in reverse order
-    grid.innerHTML = '';
-    cardsArray.forEach(card => {
-        grid.appendChild(card);
-    });
-    
     // Show only first 3 cards by default
-    const allCards = document.querySelectorAll('.rcentral-achievement-card');
-    allCards.forEach((card, index) => {
+    cards.forEach((card, index) => {
         if (index < 3) {
             card.classList.add('visible');
         }
