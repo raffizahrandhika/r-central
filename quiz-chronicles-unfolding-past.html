@@ -8,28 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700;800&display=swap"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Redesigned Quiz Chronicles Page */
+    /* Additional Styles for Quiz Chronicles */
     .rcentral-main {
       min-height: calc(100vh - 200px);
-      padding: 3rem 0;
+      padding: 2rem 0;
     }
 
     .rcentral-content-section {
       margin-bottom: 3rem;
     }
 
-    /* Hero Section */
+    /* Hero Banner */
     .hero-banner {
       background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%);
       border-radius: 20px;
-      padding: 3rem 2rem;
+      padding: 2.5rem 2rem;
       margin-bottom: 3rem;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(125, 211, 252, 0.2);
+      text-align: center;
     }
 
     .hero-banner::before {
@@ -59,15 +60,20 @@
       z-index: 1;
     }
 
-    .hero-icon {
-      font-size: 3.5rem;
-      color: #7dd3fc;
-      margin-bottom: 1rem;
+    .hero-badge {
       display: inline-block;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
     }
 
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #f8fafc;
       margin-bottom: 0.5rem;
@@ -76,32 +82,23 @@
 
     .hero-subtitle {
       font-size: 1.1rem;
-      color: #cbd5e1;
+      color: #e2e8f0;
       margin-bottom: 1.5rem;
-      max-width: 600px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(125, 211, 252, 0.2);
-      border: 1px solid rgba(125, 211, 252, 0.4);
-      color: #7dd3fc;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Features Grid */
-    .features-grid {
+    /* Info Cards */
+    .info-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 3rem;
     }
 
-    .feature-card {
+    .info-card {
       background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
       border-radius: 16px;
       padding: 2rem;
@@ -111,7 +108,7 @@
       transition: all 0.3s ease;
     }
 
-    .feature-card::before {
+    .info-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -121,193 +118,301 @@
       background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     }
 
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(125, 211, 252, 0.2);
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(125, 211, 252, 0.15);
     }
 
-    .feature-icon {
+    .card-icon {
+      font-size: 2rem;
+      color: #7dd3fc;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+    }
+
+    .card-content {
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .card-content ul {
+      padding-left: 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .card-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .card-content strong {
+      color: #f8fafc;
+    }
+
+    /* Path Selection */
+    .path-selection {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .path-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .path-card.featured {
+      border: 2px solid #7dd3fc;
+      box-shadow: 0 0 30px rgba(125, 211, 252, 0.2);
+    }
+
+    .path-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    }
+
+    .path-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .path-icon {
       font-size: 2.5rem;
       color: #7dd3fc;
       margin-bottom: 1rem;
       display: inline-block;
     }
 
-    .feature-title {
+    .path-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+    }
+
+    .path-description {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .path-features {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .path-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      color: #e2e8f0;
+    }
+
+    .path-feature i {
+      color: #7dd3fc;
+    }
+
+    .path-schedule {
+      background: rgba(125, 211, 252, 0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .schedule-title {
+      color: #7dd3fc;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .schedule-date {
+      color: #f8fafc;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .schedule-time {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* Level System */
+    .level-system {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+      border-radius: 2px;
+    }
+
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .level-card {
+      background: rgba(125, 211, 252, 0.05);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border: 1px solid rgba(125, 211, 252, 0.1);
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .level-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .level-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .level-weight {
+      display: inline-block;
+      background: rgba(125, 211, 252, 0.2);
+      color: #7dd3fc;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .level-description {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+
+    .level-example {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      font-style: italic;
+      border-left: 3px solid #7dd3fc;
+    }
+
+    /* Results Section */
+    .results-section {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      text-align: center;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .result-item {
+      background: rgba(125, 211, 252, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(125, 211, 252, 0.1);
+    }
+
+    .result-icon {
+      font-size: 2rem;
+      color: #7dd3fc;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .result-title {
       font-size: 1.2rem;
       font-weight: 700;
       color: #f8fafc;
       margin-bottom: 0.8rem;
     }
 
-    .feature-desc {
+    .result-details {
+      color: #e2e8f0;
       font-size: 0.95rem;
-      color: #cbd5e1;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    /* Coming Soon Section */
-    .coming-soon-section {
-      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      text-align: center;
-      border: 1px solid rgba(125, 211, 252, 0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .coming-soon-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    }
-
-    .coming-soon-icon {
-      font-size: 5rem;
+    .result-highlight {
       color: #7dd3fc;
-      margin-bottom: 1.5rem;
-      display: inline-block;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-
-    .coming-soon-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #f8fafc;
-      margin-bottom: 0.8rem;
-      line-height: 1.2;
-    }
-
-    .coming-soon-text {
-      font-size: 1rem;
-      color: #cbd5e1;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      line-height: 1.7;
-    }
-
-    /* Launch Countdown */
-    .launch-countdown {
-      background: rgba(125, 211, 252, 0.08);
-      border: 1px solid rgba(125, 211, 252, 0.3);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .countdown-title {
-      font-size: 1rem;
-      color: #7dd3fc;
-      margin-bottom: 1.5rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .countdown-timer {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .countdown-item {
-      text-align: center;
-    }
-
-    .countdown-number {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #7dd3fc;
-      background: rgba(125, 211, 252, 0.15);
-      padding: 1rem;
-      border-radius: 12px;
-      margin-bottom: 0.7rem;
-      display: block;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 2px;
-    }
-
-    .countdown-label {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    /* Progress Bar */
-    .progress-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(125, 211, 252, 0.2);
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .progress-percentage {
-      color: #7dd3fc;
       font-size: 1.1rem;
+      margin: 0.5rem 0;
     }
 
-    .progress-bar {
-      height: 10px;
-      background: rgba(148, 163, 184, 0.15);
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(125, 211, 252, 0.2);
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #7dd3fc, #38bdf8, #0ea5e9);
-      border-radius: 10px;
-      width: 35%;
-      position: relative;
-      box-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
-    }
-
-    .progress-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
+    /* Certificate Preview - REMOVED */
 
     /* CTA Buttons */
     .cta-buttons {
@@ -315,176 +420,160 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 2rem;
+      margin-top: 3rem;
+      padding: 0 1rem;
     }
 
     .cta-button {
       display: inline-flex;
       align-items: center;
-      gap: 0.7rem;
-      padding: 1rem 2rem;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6em 1.5em;
       font-size: 1rem;
       font-weight: 700;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: 'Nunito', sans-serif;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
     .cta-button-primary {
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+      background: linear-gradient(90deg, #38bdf8, #0ea5e9);
       color: #fff;
-      box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
+      flex: 0 1 auto;
     }
 
     .cta-button-primary:hover {
-      background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(125, 211, 252, 0.4);
+      background: linear-gradient(90deg, #0ea5e9, #0284c7);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+    }
+
+    .cta-button-primary:hover::before {
+      left: 100%;
     }
 
     .cta-button-secondary {
       background: transparent;
       color: #7dd3fc;
       border: 2px solid rgba(125, 211, 252, 0.4);
+      flex: 0 1 auto;
     }
 
     .cta-button-secondary:hover {
       background: rgba(125, 211, 252, 0.1);
       border-color: #7dd3fc;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
-    /* Mobile Responsive */
+    .cta-button-secondary:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive Styles */
     @media (max-width: 768px) {
       .rcentral-main {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
       }
 
       .hero-banner {
-        padding: 2rem 1.5rem;
-        margin-bottom: 2rem;
+        padding: 1.8rem 1.5rem;
       }
 
       .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
       }
 
       .hero-subtitle {
-        font-size: 1rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .feature-card {
-        padding: 1.5rem;
-      }
-
-      .feature-title {
-        font-size: 1.1rem;
-      }
-
-      .coming-soon-section {
-        padding: 2rem 1.5rem;
-      }
-
-      .coming-soon-icon {
-        font-size: 3.5rem;
-      }
-
-      .coming-soon-title {
-        font-size: 1.6rem;
-      }
-
-      .countdown-timer {
-        gap: 0.7rem;
-      }
-
-      .countdown-number {
-        font-size: 1.5rem;
-        padding: 0.8rem;
-      }
-
-      .countdown-label {
-        font-size: 0.65rem;
-      }
-
-      .cta-buttons {
-        gap: 0.8rem;
-      }
-
-      .cta-button {
-        padding: 0.85rem 1.5rem;
         font-size: 0.95rem;
       }
-    }
 
-    @media (max-width: 480px) {
-      .hero-banner {
-        padding: 1.5rem;
+      .info-cards-grid,
+      .path-selection {
+        grid-template-columns: 1fr;
       }
 
-      .hero-title {
-        font-size: 1.5rem;
+      .path-card {
+        padding: 1.8rem 1.5rem;
       }
 
-      .hero-icon {
-        font-size: 2.5rem;
+      .level-system,
+      .results-section {
+        padding: 1.8rem 1.5rem;
       }
 
-      .coming-soon-section {
-        padding: 1.5rem;
+      .section-title {
+        font-size: 1.35rem;
       }
 
-      .coming-soon-icon {
-        font-size: 3rem;
-      }
-
-      .coming-soon-title {
-        font-size: 1.4rem;
-      }
-
-      .coming-soon-text {
-        font-size: 0.9rem;
-      }
-
-      .countdown-timer {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .countdown-number {
-        font-size: 1.3rem;
+      .levels-grid {
+        grid-template-columns: 1fr;
       }
 
       .cta-buttons {
         flex-direction: column;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        gap: 0.8rem;
+        padding: 0;
       }
 
       .cta-button {
-        width: 100%;
-        justify-content: center;
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        width: calc(100% - 2rem);
+        padding: 0.6em 1rem;
+        font-size: 0.95rem;
+        gap: 0.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.3rem;
       }
 
-      /* Ensure anchors and buttons render the same when borders are present */
-      .cta-button, .cta-button-primary, .cta-button-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+      .hero-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .card-title,
+      .path-title {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 1.2rem;
+      }
+
+      .result-item {
+        padding: 1.2rem;
+      }
+
+      .cta-button {
+        font-size: 0.9rem;
+        padding: 0.55em 1rem;
+        gap: 0.3rem;
+        width: calc(100% - 2rem);
+      }
+
+      .cta-buttons {
+        padding: 0;
       }
     }
   </style>
@@ -511,99 +600,267 @@
         <div class="hero-banner">
           <div class="hero-content">
             <div class="hero-badge">
-              <i class="fas fa-clock"></i> Coming January 2026
+              <i class="fas fa-history"></i> 10 - 27 Januari 2026
             </div>
             <h1 class="hero-title">Quiz Chronicles</h1>
-            <p class="hero-subtitle">Jelajahi perjalanan sejarah dunia melalui kuis interaktif yang menantang dan edukatif</p>
+            <p class="hero-subtitle">The Unfolding Past - Jelajahi peristiwa besar, tokoh berpengaruh, hingga peradaban
+              yang membentuk dunia. Melatih kemampuan literasi sejarah dan pemahaman kritis.</p>
           </div>
         </div>
       </section>
 
-      <!-- Features Section -->
+      <!-- Informasi Umum -->
       <section class="rcentral-content-section">
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-globe"></i>
+        <h2 class="section-title">Informasi Umum</h2>
+        <div class="info-cards-grid">
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-book-open"></i>
             </div>
-            <h3 class="feature-title">Kisah Dunia</h3>
-            <p class="feature-desc">Pelajari peristiwa-peristiwa bersejarah dari berbagai belahan dunia dalam satu platform interaktif.</p>
+            <h3 class="card-title">Tema & Tujuan</h3>
+            <div class="card-content">
+              <p><strong>Tema:</strong> Sejarah Indonesia & Global</p>
+              <p><strong>Tujuan:</strong> Melatih kemampuan literasi sejarah, pemahaman kritis, serta memperluas wawasan
+                masa lalu untuk memahami masa kini.</p>
+            </div>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-brain"></i>
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-question-circle"></i>
             </div>
-            <h3 class="feature-title">Tantangan Menarik</h3>
-            <p class="feature-desc">Uji pengetahuan Anda dengan pertanyaan yang dirancang khusus untuk mengasah kemampuan berpikirmu.</p>
+            <h3 class="card-title">Format Kuis</h3>
+            <div class="card-content">
+              <ul>
+                <li><strong>Total Soal:</strong> 15 Soal pilihan ganda</li>
+                <li><strong>Platform:</strong> Website & Instagram Story</li>
+                <li><strong>Pendekatan:</strong> HOTS (Higher Order Thinking Skills)</li>
+                <li><strong>Skor Maksimal:</strong> 1000 poin</li>
+              </ul>
+            </div>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-trophy"></i>
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-calendar-alt"></i>
             </div>
-            <h3 class="feature-title">Raih Pencapaian</h3>
-            <p class="feature-desc">Kumpulkan badge dan sertifikat sambil menyelesaikan berbagai level tantangan sejarah.</p>
+            <h3 class="card-title">Periode Kuis</h3>
+            <div class="card-content">
+              <p><strong>Pilihan Jalur:</strong></p>
+              <ul>
+                <li><strong>The Rapid Epoch:</strong> 10-12 Jan 2026</li>
+                <li><strong>The Daily Chronicle:</strong> 13-27 Jan 2026</li>
+              </ul>
+              <p>Hasil diumumkan: <strong>28 Januari 2026</strong></p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Coming Soon Section -->
+      <!-- Pilih Jalur Pengerjaan -->
       <section class="rcentral-content-section">
-        <div class="coming-soon-section">
-          <div class="coming-soon-icon">
-            <i class="fas fa-hourglass-end"></i>
+        <h2 class="section-title">Pilih Jalur Pengerjaan</h2>
+        <p
+          style="text-align: center; color: #94a3b8; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Pilih salah satu dari dua cara untuk berpartisipasi dalam Quiz Chronicles. Setiap jalur memiliki keunikan dan
+          kelebihan masing-masing.
+        </p>
+
+        <div class="path-selection">
+          <!-- Jalur 1: The Rapid Epoch -->
+          <div class="path-card">
+            <div class="path-badge">Fast Track</div>
+            <div class="path-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="path-title">The Rapid Epoch</h3>
+            <p class="path-description">
+              Cocok untuk kamu yang sibuk dan tidak bisa memantau Instagram setiap hari.
+            </p>
+
+            <div class="path-features">
+              <div class="path-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Pengerjaan sekaligus (15 soal) dalam satu waktu</span>
+              </div>
+              <div class="path-feature">
+                <i class="fas fa-laptop"></i>
+                <span>Melalui website pribadi</span>
+              </div>
+              <div class="path-feature">
+                <i class="fas fa-user-clock"></i>
+                <span>Fleksibel waktu pengerjaan</span>
+              </div>
+            </div>
+
+            <div class="path-schedule">
+              <div class="schedule-title">Periode Pengerjaan</div>
+              <div class="schedule-date">10 - 12 Januari 2026</div>
+              <div class="schedule-time">Waktu bebas (24 jam)</div>
+            </div>
           </div>
-          <h2 class="coming-soon-title">Sedang Dikembangkan</h2>
-          <p class="coming-soon-text">
-            Quiz Chronicles sedang dalam tahap pengembangan intensif. Tim kami bekerja keras untuk menciptakan pengalaman belajar yang luar biasa. Bersiaplah untuk petualangan sejarah yang tak terlupakan!
+
+          <!-- Jalur 2: The Daily Chronicle -->
+          <div class="path-card featured">
+            <div class="path-badge">Most Popular</div>
+            <div class="path-icon">
+              <i class="fas fa-calendar-day"></i>
+            </div>
+            <h3 class="path-title">The Daily Chronicle</h3>
+            <p class="path-description">
+              Pengalaman harian yang interaktif melalui Instagram Story.
+            </p>
+
+            <div class="path-features">
+              <div class="path-feature">
+                <i class="fas fa-poll"></i>
+                <span>1 soal diunggah setiap hari melalui polling</span>
+              </div>
+              <div class="path-feature">
+                <i class="fas fa-clock"></i>
+                <span>Setiap pukul 16.30 WIB</span>
+              </div>
+              <div class="path-feature">
+                <i class="fas fa-book-reader"></i>
+                <span>Pembahasan detail 24 jam setelah soal</span>
+              </div>
+            </div>
+
+            <div class="path-schedule">
+              <div class="schedule-title">Periode Pengerjaan</div>
+              <div class="schedule-date">13 - 27 Januari 2026</div>
+              <div class="schedule-time">Setiap hari pukul 16.30 WIB</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sistem Penilaian -->
+      <section class="rcentral-content-section">
+        <div class="level-system">
+          <h2 class="section-title">Sistem Distribusi Level</h2>
+          <p
+            style="text-align: center; color: #94a3b8; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Setiap soal memiliki bobot berbeda berdasarkan tingkat kesulitannya. Sistem penilaian memperhitungkan
+            konsistensi dan ketepatan jawaban.
           </p>
 
-          <!-- Countdown -->
-          <div class="launch-countdown">
-            <div class="countdown-title">Peluncuran Dalam:</div>
-            <div class="countdown-timer">
-              <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Hari</span>
+          <div class="levels-grid">
+            <!-- Level 1 -->
+            <div class="level-card">
+              <div class="level-header">
+                <div class="level-number">1</div>
+                <div class="level-name">Level Mudah</div>
               </div>
-              <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Jam</span>
-              </div>
-              <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Menit</span>
-              </div>
-              <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Detik</span>
+              <div class="level-weight">Bobot Nilai Rendah</div>
+              <p class="level-description">
+                Soal dengan kesulitan rendah, menguji pengetahuan dasar sejarah.
+              </p>
+              <div class="level-example">
+                <strong>Contoh:</strong> "Siapakah proklamator kemerdekaan Indonesia?"
               </div>
             </div>
 
-            <!-- Progress Section -->
-            <div class="progress-section">
-              <div class="progress-label">
-                <span>Development Progress</span>
-                <span class="progress-percentage">35%</span>
+            <!-- Level 2 -->
+            <div class="level-card">
+              <div class="level-header">
+                <div class="level-number">2</div>
+                <div class="level-name">Level Sedang</div>
               </div>
-              <div class="progress-bar">
-                <div class="progress-fill"></div>
+              <div class="level-weight">Bobot Nilai Menengah</div>
+              <p class="level-description">
+                Soal dengan kesulitan menengah, membutuhkan analisis atau pemahaman konteks.
+              </p>
+              <div class="level-example">
+                <strong>Contoh:</strong> "Apa dampak utama Revolusi Industri terhadap struktur sosial Eropa?"
+              </div>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="level-card">
+              <div class="level-header">
+                <div class="level-number">3</div>
+                <div class="level-name">Level Sulit</div>
+              </div>
+              <div class="level-weight">Bobot Nilai Tinggi</div>
+              <p class="level-description">
+                Soal dengan kesulitan tinggi, menguji pemahaman mendalam dan analisis kritis.
+              </p>
+              <div class="level-example">
+                <strong>Contoh:</strong> "Bagaimana pengaruh Perang Dingin terhadap perkembangan teknologi di Asia
+                Tenggara?"
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <!-- CTA Buttons -->
-          <div class="cta-buttons">
-            <button class="cta-button cta-button-primary" id="notify-btn">
-              <i class="fas fa-bell"></i>
-              Beritahu Saya
-            </button>
-            <a href="index.html#quiz-agenda" class="cta-button cta-button-secondary">
-              <i class="fas fa-arrow-left"></i>
-              Kembali
-            </a>
+      <!-- Hasil & Sertifikat -->
+      <section class="rcentral-content-section">
+        <div class="results-section">
+          <h2 class="section-title">Hasil & Sertifikat</h2>
+          <p style="color: #e2e8f0; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Lihat performa dan raih sertifikat partisipasi sebagai bukti perjalanan belajar sejarah Anda.
+          </p>
+
+          <div class="results-grid">
+            <div class="result-item">
+              <div class="result-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="result-title">Pengumuman Hasil</h3>
+              <div class="result-details">
+                <p class="result-highlight">28 Januari 2026, 16.30 WIB</p>
+                <p>Akses melalui website R-QUEST dengan memasukkan username Instagram Anda.</p>
+              </div>
+            </div>
+
+            <div class="result-item">
+              <div class="result-icon">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <h3 class="result-title">Laporan Performa</h3>
+              <div class="result-details">
+                <p>Dapatkan analisis lengkap termasuk:</p>
+                <ul style="text-align: left; margin: 1rem 0;">
+                  <li>Skor total (maks 1000 poin)</li>
+                  <li>Riwayat jawaban benar/salah</li>
+                  <li>Peringkat akhir</li>
+                  <li>Analisis area perbaikan</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="result-item">
+              <div class="result-icon">
+                <i class="fas fa-award"></i>
+              </div>
+              <h3 class="result-title">Sertifikat Partisipasi</h3>
+              <div class="result-details">
+                <p>Unduh sertifikat digital langsung dari website!</p>
+                <p class="result-highlight">Tersedia untuk Desktop & Mobile</p>
+                <p><em>*Tidak bisa unduh gambar dari Instagram</em></p>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="rcentral-content-section">
+        <div class="cta-buttons">
+          <a href="https://quizlabbyraffi.blogspot.com/" class="cta-button cta-button-primary" target="_blank">
+            <i class="fas fa-chart-line"></i>
+            Lihat Hasil
+          </a>
+          <a href="index.html#quiz-agenda" class="cta-button cta-button-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Kembali ke Agenda
+          </a>
+          <a href="https://instagram.com/raffizahrandhika" class="cta-button cta-button-secondary" target="_blank">
+            <i class="fab fa-instagram"></i>
+            Follow di Instagram
+          </a>
         </div>
       </section>
     </div>
@@ -652,7 +909,7 @@
                 <i class="fab fa-tiktok"></i>
               </a>
               <a href="https://x.com/mrffzd" class="rcentral-social-icon" title="Twitter">
-                <i class="fab fa-twitter"></i>
+                <i class="fab fa-x-twitter"></i>
               </a>
               <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378" class="rcentral-social-icon"
                 title="LinkedIn">
@@ -663,47 +920,12 @@
         </div>
       </div>
       <div class="rcentral-copyright">
-        <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+        <p>© 2025-2026 Muhammad Raffi Zahrandhika. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Countdown Timer
-    function updateCountdown() {
-      const launchDate = new Date('2026-01-06T00:00:00').getTime();
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      if (distance < 0) {
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days.toString().padStart(2, '0');
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-
-    // Update countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
-
-    // Notify button functionality
-    document.getElementById('notify-btn').addEventListener('click', function (e) {
-      e.preventDefault();
-      alert('Terima kasih! Kami akan memberi tahu Anda ketika Quiz Chronicles sudah siap diluncurkan.');
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
