@@ -11,6 +11,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .rcentral-body {
@@ -19,6 +20,7 @@ body {
     min-height: 100vh;
     color: #e2e8f0;
     line-height: 1.6;
+    padding-top: 70px;
 }
 
 .rcentral-container {
@@ -29,12 +31,18 @@ body {
 
 /* Navigation */
 .rcentral-nav {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    position: sticky;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     padding: 0.5rem 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .rcentral-nav-content {
@@ -61,54 +69,41 @@ body {
     font-weight: 300;
 }
 
+/* --- GAYA NAVIGASI BARU (Glowing Pill) --- */
+
 .rcentral-nav-menu {
     display: flex;
-    gap: 2rem;
     list-style: none;
+    gap: 0.5rem; /* Ubah gap jadi lebih kecil karena kita pakai padding tombol */
     margin: 0;
     padding: 0;
+    align-items: center; /* Pastikan vertikal center */
 }
 
 .rcentral-nav-menu a {
-    color: #f8fafc;
     text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 0;
+    color: #cbd5e1; /* Warna teks default (abu terang) */
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem; /* Memberi ruang untuk background kapsul */
+    border-radius: 50px;    /* Membuat bentuk kapsul bulat */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transisi halus */
     position: relative;
-    transition: color 0.2s;
 }
 
-.rcentral-nav-menu a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
-}
-
+/* Efek saat Mouse Hover (Nyala redup) */
 .rcentral-nav-menu a:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.05); /* Background putih transparan tipis */
+    transform: translateY(-2px); /* Sedikit naik */
 }
 
-.rcentral-nav-menu a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-/* Navigation Active State */
+/* Efek saat Menu AKTIF (Glowing Gradient Pill) */
 .rcentral-nav-menu a.active {
-    color: #fff;
+    background: var(--primary-gradient); /* Warna Cyan Gradient */
+    color: #0f172a; /* Warna teks jadi gelap (Navy) agar kontras terbaca */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); /* Efek cahaya (Glow) di sekitar tombol */
     font-weight: 700;
-}
-
-.rcentral-nav-menu a.active::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
 }
 
 .rcentral-nav-toggle {
@@ -129,10 +124,14 @@ body {
 
 /* Hero Section */
 .rcentral-hero {
-    padding: 6rem 0 4rem 0;
-    background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
+    padding: 80px 60px 80px 60px;
     position: relative;
-    overflow: hidden;
+    /* Tambahkan background image grid matematika halus */
+    background-color: transparent; 
+    background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px; /* Ukuran kotak-kotak */
 }
 
 .rcentral-hero::before {
@@ -315,7 +314,233 @@ body {
     border: 2px solid rgba(125, 211, 252, 0.3);
 }
 
-/* Projects Section */
+/* Timeline Styles */
+.rcentral-about-intro {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.timeline-container {
+    position: relative;
+    padding: 2rem 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Vertical Line in center */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, #7dd3fc, #38bdf8, #0ea5e9, #38bdf8);
+    top: 0;
+    z-index: 1;
+}
+
+/* Timeline Items */
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.timeline-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 0 0 4px #1a1a2e, 0 0 20px rgba(125, 211, 252, 0.5);
+    transition: all 0.3s ease;
+    border: 3px solid #1a1a2e;
+}
+
+.timeline-item:hover .timeline-circle {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px #1a1a2e, 0 0 30px rgba(125, 211, 252, 0.8);
+}
+
+/* Timeline Content */
+.timeline-content {
+    position: relative;
+    width: 45%;
+    z-index: 5;
+}
+
+.timeline-content.left {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: right;
+    padding-right: 3rem;
+}
+
+.timeline-content.right {
+    margin-left: auto;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 3rem;
+}
+
+.timeline-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 15px;
+    padding: 1.8rem;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+}
+
+.timeline-item:hover .timeline-card {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(125, 211, 252, 0.3);
+    border-color: rgba(125, 211, 252, 0.4);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: rgba(125, 211, 252, 0.1);
+    color: #7dd3fc;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(125, 211, 252, 0.3);
+}
+
+.timeline-card h3 {
+    color: #f8fafc;
+    font-size: 1.3rem;
+    margin: 0.8rem 0;
+    font-weight: 700;
+}
+
+.timeline-card p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.timeline-tags {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: flex-start;
+}
+
+.timeline-content.left .timeline-tags {
+    justify-content: flex-end;
+}
+
+.tag {
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    padding: 0.35rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .tag {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.6);
+}
+
+/* Future Vision Card Styling */
+.timeline-card-future {
+    border: 2px solid rgba(125, 211, 252, 0.4);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
+}
+
+/* About Summary Section */
+.about-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.2);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(51, 65, 85, 0.6) 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(125, 211, 252, 0.15);
+    transition: all 0.4s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(125, 211, 252, 0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(125, 211, 252, 0.2);
+}
+
+.summary-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 auto 1rem;
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
+}
+
+.summary-card h4 {
+    color: #f8fafc;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+
+.summary-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Container Utama Projects */
 .rcentral-projects {
     padding: 5rem 0;
     background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
@@ -327,87 +552,318 @@ body {
     gap: 2rem;
 }
 
+/* Container Kartu Project */
 .rcentral-project-card {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(148, 163, 184, 0.1);
     position: relative;
+    height: 400px;
+    border-radius: 18px;
     overflow: hidden;
+    padding: 0;
+    border: 1px solid rgba(125, 211, 252, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: #0f172a;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
-.rcentral-project-card::before {
-    content: '';
+/* Badge Project */
+.project-badge {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    border-radius: 20px 20px 0 0;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+    color: #0f172a;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 5;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
 }
 
-.rcentral-project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(125, 211, 252, 0.2);
+/* Image Preview */
+.project-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rcentral-project-icon {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 1.5rem;
+/* Overlay Gradient */
+.rcentral-project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, 
+        rgba(51, 65, 85, 0.1) 0%,
+        rgba(51, 65, 85, 0.3) 30%,
+        rgba(51, 65, 85, 0.85) 50%,
+        rgba(51, 65, 85, 1.0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    transition: all 0.4s ease;
+    gap: 1rem;
+}
+
+/* Project Tags */
+.project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    opacity: 0.8;
+}
+
+.project-tag {
+    background: rgba(125, 211, 252, 0.2);
+    color: #7dd3fc;
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid rgba(125, 211, 252, 0.4);
+    transition: all 0.3s ease;
+}
+
+.rcentral-project-card:hover .project-tag {
+    background: rgba(125, 211, 252, 0.35);
+    border-color: rgba(125, 211, 252, 0.6);
+}
+
+/* Project Info */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.project-info h3 {
+    font-size: 1.5rem;
+    color: #f8fafc;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.project-info p {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Project Link */
+.rcentral-project-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 70px;
+    gap: 0.5rem;
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    border-radius: 50%;
-    margin: 0 auto 1.5rem auto;
-    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
-}
-
-.rcentral-project-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #f8fafc;
-    text-align: center;
-}
-
-.rcentral-project-card p {
-    color: #94a3b8;
-    text-align: center;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-}
-
-.rcentral-project-links {
-    text-align: center;
-}
-
-.rcentral-project-link {
-    display: inline-block;
-    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    color: white !important;
-    padding: 0.7rem 1.5rem;
-    border-radius: 12px;
+    color: #0f172a !important;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.9rem;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
+    box-shadow: 0 4px 15px rgba(125, 211, 252, 0.25);
+    width: fit-content;
+    align-self: flex-start;
 }
 
 .rcentral-project-link:hover {
-    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(125, 211, 252, 0.4);
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
+}
+
+/* Hover Effects */
+.rcentral-project-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.4),
+                0 0 60px rgba(14, 165, 233, 0.2),
+                0 15px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(125, 211, 252, 0.4);
+}
+
+.rcentral-project-card:hover .project-preview-img {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+.rcentral-project-card:hover .rcentral-project-overlay {
+    background: linear-gradient(180deg,
+        rgba(15, 23, 42, 0.2) 0%,
+        rgba(15, 23, 42, 0.4) 30%,
+        rgba(15, 23, 42, 0.8) 70%,
+        rgba(15, 23, 42, 0.98) 100%);
+}
+
+/* --- MODERN DESIGN SHOWCASE (BLUE THEME) --- */
+.rcentral-design-modern {
+    /* Background Gradient */
+    background: linear-gradient(180deg, #0f0f23 0%, #1e293b 100%);
+    padding: 100px 0 120px 0;
+    position: relative;
+    overflow: hidden;
+    color: #e2e8f0;
+    border-top: 1px solid rgba(56, 189, 248, 0.1);    
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+/* Dekorasi Background (Floating Shapes - Cyan & Blue) */
+.math-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px); /* Blur lebih halus */
+    z-index: 0;
+    opacity: 0.3; /* Opacity rendah agar tidak mengganggu konten */
+}
+
+.shape-1 {
+    width: 350px;
+    height: 350px;
+    background: #0ea5e9; /* Sky Blue (Primary) */
+    top: -100px;
+    left: -100px;
+}
+
+.shape-2 {
+    width: 450px;
+    height: 450px;
+    background: #7dd3fc; /* Light Cyan */
+    bottom: -150px;
+    right: -100px;
+}
+
+.design-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+/* Highlight text menjadi Cyan */
+.rcentral-section-subtitle span {
+    color: #38bdf8; 
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* --- LAPTOP MOCKUP CSS --- */
+.laptop-mockup-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 850px; /* Sedikit diperlebar agar desain lebih jelas */
+    margin: 0 auto;
+    perspective: 1500px;
+}
+
+/* Bagian Layar (Frame) */
+.laptop-screen-frame {
+    background: #0f172a; /* Slate 900 (Sangat gelap) */
+    padding: 12px 12px 20px 12px;
+    border-radius: 16px 16px 0 0;
+    /* Shadow cyan tipis untuk kesan glowing futuristik */
+    box-shadow: 0 0 0 1px #334155, 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+.laptop-screen-frame:hover {
+    transform: translateY(-8px);
+    /* Saat hover, glow cyan sedikit lebih terang */
+    box-shadow: 0 0 0 1px #38bdf8, 0 30px 60px -15px rgba(14, 165, 233, 0.2);
+}
+
+/* Kamera Laptop */
+.laptop-camera {
+    width: 6px;
+    height: 6px;
+    background: #475569;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+/* Lampu indikator kamera (titik hijau kecil) */
+.laptop-camera::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 2px;
+    width: 2px;
+    height: 2px;
+    background: #10b981; /* Hijau redup */
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+/* Konten Layar */
+.laptop-screen-content {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+}
+
+.laptop-screen-content iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Bagian Bawah Laptop (Base) */
+.laptop-base {
+    height: 18px;
+    background: linear-gradient(to bottom, #334155 0%, #1e293b 100%); /* Gradasi metalik gelap */
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    width: 110%; /* Lebih lebar dari layar */
+    left: -5%;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+    z-index: 1;
+}
+
+/* Lekukan untuk membuka laptop */
+.laptop-base::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: #1e293b; /* Lebih gelap */
+    border-radius: 0 0 8px 8px;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .laptop-mockup-wrapper {
+        max-width: 100%;
+    }
+    
+    .laptop-base {
+        width: 100%;
+        left: 0;
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .laptop-screen-frame {
+        padding: 8px 8px 12px 8px;
+        border-radius: 10px 10px 0 0;
+    }
 }
 
 /* Enhanced Skills Section */
@@ -434,10 +890,10 @@ body {
 .skill-category {
     background: var(--card-bg);
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    transition: all 0.32s ease;
+    border: 1px solid rgba(148, 163, 184, 0.08);
     position: relative;
     overflow: hidden;
 }
@@ -465,21 +921,21 @@ body {
 }
 
 .skill-category-icon {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1.5rem;
-    font-size: 1.5rem;
+    margin-right: 1.2rem;
+    font-size: 1.3rem;
     color: white;
-    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.36);
 }
 
 .skill-category-title {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 700;
     color: #f8fafc;
     margin: 0;
@@ -494,13 +950,13 @@ body {
 .skill-list {
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.4rem;
 }
 
 .skill-item {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.7rem;
 }
 
 .skill-header {
@@ -518,12 +974,12 @@ body {
 .skill-percentage {
     font-weight: 700;
     color: #7dd3fc;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .skill-bar-container {
-    height: 12px;
-    background: rgba(148, 163, 184, 0.2);
+    height: 10px;
+    background: rgba(148, 163, 184, 0.18);
     border-radius: 10px;
     overflow: hidden;
     position: relative;
@@ -534,9 +990,9 @@ body {
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     border-radius: 10px;
     width: 0;
-    transition: width 1.5s ease-in-out;
+    transition: width 1.2s ease-in-out;
     position: relative;
-    box-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+    box-shadow: 0 0 8px rgba(125, 211, 252, 0.45);
 }
 
 .skill-bar::after {
@@ -630,20 +1086,20 @@ body {
 }
 
 .rcentral-achievement-content {
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .rcentral-achievement-content h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     color: #f8fafc;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
     line-height: 1.4;
 }
 
 .rcentral-achievement-content p {
     color: #94a3b8;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    line-height: 1.55;
     font-size: 0.95rem;
 }
 
@@ -685,15 +1141,15 @@ body {
     gap: 0.5rem;
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
     color: white !important;
-    padding: 0.8rem 1.5rem;
+    padding: 0.7rem 1.2rem;
     border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    transition: all 0.28s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(125, 211, 252, 0.3);
+    box-shadow: 0 3px 12px rgba(125, 211, 252, 0.28);
     width: 100%;
     justify-content: center;
     font-family: 'Nunito', sans-serif;
@@ -747,110 +1203,201 @@ body {
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(51, 65, 85, 0.7) 100%);
 }
 
-.rcentral-cards-grid {
+.quiz-intro-text {
+    text-align: center;
+    color: #cbd5e1;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Quiz Grid */
+.rcentral-quiz-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    margin-bottom: 4rem;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.rcentral-card {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    position: relative;
+/* Quiz Card Container */
+.quiz-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #1e293b 0%, #2d3e50 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(125, 211, 252, 0.15);
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     cursor: pointer;
+    height: 100%;
+    padding: 0;
 }
 
-.rcentral-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
+.quiz-card:hover {
+    border-color: rgba(125, 211, 252, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(56, 189, 248, 0.2);
+    transform: translateY(-8px);
+}
+
+/* Quiz Card Header */
+.quiz-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.08) 0%, rgba(56, 189, 248, 0.04) 100%);
+    border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+}
+
+/* Quiz Icon */
+.quiz-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
     background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    border-radius: 20px 20px 0 0;
-}
-
-.rcentral-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(125, 211, 252, 0.05), rgba(56, 189, 248, 0.05));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 20px;
-    pointer-events: none;
-}
-
-.rcentral-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(125, 211, 252, 0.2);
-}
-
-.rcentral-card:hover::after {
-    opacity: 1;
-}
-
-.rcentral-card-icon {
-    font-size: 2.2rem;
-    color: white;
-    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    border-radius: 50%;
-    margin: 0 auto 1.5rem auto;
-    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.4);
-}
-
-.rcentral-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #f8fafc;
-    text-align: center;
-}
-
-.rcentral-card p {
-    color: #94a3b8;
-    text-align: center;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-}
-
-.rcentral-card-button {
-    display: inline-block;
-    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
-    color: white !important;
-    padding: 0.8rem 1.6rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.6rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(125, 211, 252, 0.25);
     transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.quiz-card:hover .quiz-icon {
+    transform: scale(1.08) rotate(-5deg);
+    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.35);
+}
+
+/* Quiz Meta */
+.quiz-meta {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quiz-status {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
+}
+
+.active-status {
+    background: rgba(34, 197, 94, 0.15);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.completed-status {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.coming-status {
+    background: rgba(248, 113, 113, 0.15);
+    color: #fca5a5;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+/* Quiz Content */
+.quiz-card-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.quiz-card-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+
+.quiz-card-content p {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Quiz Info Row */
+.quiz-info-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
+}
+
+.quiz-duration,
+.quiz-difficulty {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #7dd3fc;
+    font-weight: 500;
+}
+
+.quiz-duration i,
+.quiz-difficulty i {
+    font-size: 0.9rem;
+}
+
+/* Quiz Card Link */
+.quiz-card-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1rem 1.5rem 1.5rem 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    color: #0f172a !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(125, 211, 252, 0.3);
-    position: relative;
-    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(125, 211, 252, 0.25);
+    width: calc(100% - 3rem);
+    box-sizing: border-box;
 }
 
-.rcentral-card-button:hover {
-    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
+.quiz-card-link:hover:not(.disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(125, 211, 252, 0.4);
+    box-shadow: 0 6px 22px rgba(125, 211, 252, 0.35);
+    background: linear-gradient(135deg, #0ea5e9, #0284c7, #0369a1);
+}
+
+.quiz-card-link.disabled {
+    background: rgba(125, 211, 252, 0.15);
+    color: #7dd3fc !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.quiz-card-link.disabled:hover {
+    transform: none;
 }
 
 /* Floating Animation */
@@ -1385,15 +1932,20 @@ body {
         top: 0;
         right: -100%;
         flex-direction: column;
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        width: 280px;
+        background: rgba(30, 41, 59, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        width: 100%;
+        max-width: 280px;
         height: 100vh;
-        transition: 0.3s ease-in-out;
+        transition: right 0.3s ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
         padding: 5rem 2rem 2rem 2rem;
         gap: 1.5rem;
         z-index: 99;
         margin: 0;
+        overflow-y: auto;
+        border-left: 1px solid rgba(148, 163, 184, 0.1);
     }
     
     .rcentral-nav-menu.active {
@@ -1402,7 +1954,8 @@ body {
     
     .rcentral-nav-toggle {
         display: flex;
-        z-index: 100;
+        z-index: 101;
+        position: relative;
     }
     
     /* Header */
@@ -1418,6 +1971,30 @@ body {
     .rcentral-hero {
         padding: 5rem 0 3rem 0;
     }
+
+    /* Skills - mobile tweaks */
+    .skill-category {
+        padding: 1.6rem;
+    }
+
+    .skill-category-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+    }
+
+    .skill-category-title {
+        font-size: 1.25rem;
+    }
+
+    .skill-list {
+        gap: 1.1rem;
+    }
+
+    .skill-bar-container {
+        height: 9px;
+    }
     
     .rcentral-hero-title {
         font-size: 2.2rem;
@@ -1429,11 +2006,13 @@ body {
     
     .rcentral-hero-description {
         font-size: 1rem;
+        text-align: center;
     }
     
     .rcentral-hero-buttons {
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
         gap: 1rem;
     }
@@ -1467,6 +2046,127 @@ body {
         width: 180px;
         height: 180px;
         font-size: 3rem;
+    }
+
+    /* Timeline Section Mobile */
+    .timeline-container::before {
+        left: 30px;
+    }
+
+    .timeline-content {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 0 0 100px !important;
+        text-align: left !important;
+    }
+
+    .timeline-content.left {
+        padding-left: 100px !important;
+    }
+
+    .timeline-content.right {
+        padding-left: 100px !important;
+    }
+
+    .timeline-marker {
+        left: 0;
+        transform: none;
+    }
+
+    .timeline-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .timeline-tags {
+        justify-content: flex-start !important;
+    }
+
+    .timeline-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .timeline-card p {
+        font-size: 0.9rem;
+    }
+
+    .about-summary {
+        grid-template-columns: 1fr;
+    }
+
+    /* Project Cards Mobile */
+    .rcentral-projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rcentral-project-card {
+        height: 380px;
+    }
+
+    .project-badge {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.8rem;
+    }
+
+    .project-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .project-info p {
+        font-size: 0.85rem;
+    }
+
+    .project-tag {
+        font-size: 0.65rem;
+    }
+
+    .rcentral-project-overlay {
+        padding: 1.5rem;
+    }
+
+    .project-preview-img {
+        object-position: top !important;
+    }
+
+    .rcentral-project-link {
+        box-sizing: border-box; 
+        width: 100%;
+    }
+
+    /* Quiz Cards Mobile */
+    .rcentral-quiz-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .quiz-card-header {
+        padding: 1.2rem;
+    }
+
+    .quiz-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+    }
+
+    .quiz-card-content {
+        padding: 1.2rem;
+    }
+
+    .quiz-card-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .quiz-info-row {
+        gap: 1rem;
+    }
+
+    .quiz-card-link {
+        margin: 0.8rem 1.2rem 1.2rem 1.2rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+        width: calc(100% - 2.4rem);
     }
     
     /* Skills Section */
@@ -1561,6 +2261,60 @@ body {
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
+
+    /* Project Cards - 600px */
+    .project-preview-img {
+        object-position: top !important;
+    }
+
+    .project-badge {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .rcentral-project-overlay {
+        padding: 1.5rem;
+    }
+
+    /* Quiz Cards - 600px */
+    .quiz-card {
+        border-radius: 14px;
+    }
+
+    .quiz-card-header {
+        padding: 1rem;
+    }
+
+    .quiz-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .quiz-card-content {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .quiz-card-content h3 {
+        font-size: 1rem;
+    }
+
+    .quiz-card-content p {
+        font-size: 0.85rem;
+    }
+
+    .quiz-info-row {
+        gap: 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .quiz-card-link {
+        margin: 0.7rem 1rem 1rem 1rem;
+        padding: 0.65rem 1rem;
+        font-size: 0.8rem;
+        width: calc(100% - 2rem);
+    }
     
     /* Footer */
     .rcentral-footer-logo h3 {
@@ -1619,8 +2373,7 @@ body {
     }
     
     /* Card & Content Typography */
-    .rcentral-card,
-    .rcentral-project-card {
+    .rcentral-card {
         padding: 1.5rem;
     }
     
@@ -1693,6 +2446,43 @@ body {
     .rcentral-about-text p {
         font-size: 0.95rem;
         line-height: 1.6;
+    }
+
+    /* Timeline Mobile (600px) */
+    .timeline-container {
+        padding: 1rem 0;
+    }
+
+    .timeline-container::before {
+        left: 25px;
+    }
+
+    .timeline-circle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .timeline-content {
+        padding-left: 90px !important;
+    }
+
+    .timeline-year {
+        font-size: 0.75rem;
+    }
+
+    .timeline-card h3 {
+        font-size: 1rem;
+        margin: 0.6rem 0;
+    }
+
+    .timeline-card p {
+        font-size: 0.85rem;
+    }
+
+    .tag {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
     }
     
     /* Modal - ENHANCED FOR SMALLER SCREENS */
@@ -1769,6 +2559,126 @@ body {
     .rcentral-copyright p {
         text-align: center !important;
     }
+
+    /* Project Cards - 480px */
+    .rcentral-project-card {
+        height: 360px;
+    }
+
+    .project-badge {
+        top: 0.8rem;
+        right: 0.8rem;
+        font-size: 0.6rem;
+        padding: 0.25rem 0.6rem;
+    }
+
+    .rcentral-project-overlay {
+        padding: 1.2rem;
+        gap: 0.8rem;
+    }
+
+    .project-tags {
+        gap: 0.4rem;
+    }
+
+    .project-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .project-info p {
+        font-size: 0.8rem;
+    }
+
+    .rcentral-project-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    /* Quiz Cards - 480px */
+    .rcentral-quiz-grid {
+        gap: 1.2rem;
+    }
+
+    .quiz-card {
+        border-radius: 12px;
+    }
+
+    .quiz-card-header {
+        padding: 0.9rem;
+        gap: 0.8rem;
+    }
+
+    .quiz-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .quiz-status {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.65rem;
+    }
+
+    .quiz-card-content {
+        padding: 0.9rem;
+        gap: 0.6rem;
+    }
+
+    .quiz-card-content h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .quiz-card-content p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .quiz-info-row {
+        gap: 0.6rem;
+        margin-top: 0.4rem;
+        padding-top: 0.8rem;
+        font-size: 0.7rem;
+    }
+
+    .quiz-card-link {
+        margin: 0.6rem 0.9rem 0.9rem 0.9rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        width: calc(100% - 1.8rem);
+    }
+
+    /* Skills & Achievement mobile refinements */
+    .skill-category {
+        padding: 1.4rem;
+        border-radius: 14px;
+    }
+
+    .skill-category-title {
+        font-size: 1.15rem;
+    }
+
+    .skill-name {
+        font-size: 0.95rem;
+    }
+
+    .skill-percentage {
+        font-size: 0.8rem;
+    }
+
+    .rcentral-achievement-content {
+        padding: 1.2rem;
+    }
+
+    .rcentral-achievement-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .rcentral-certificate-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.82rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1834,6 +2744,49 @@ body {
     .rcentral-certificate-btn {
         padding: 0.7rem 1.2rem;
         font-size: 0.85rem;
+    }
+
+    /* Timeline Mobile (480px) */
+    .timeline-container::before {
+        left: 20px;
+    }
+
+    .timeline-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .timeline-content {
+        padding-left: 80px !important;
+    }
+
+    .timeline-item {
+        margin-bottom: 2rem;
+    }
+
+    .timeline-card {
+        padding: 1.2rem;
+    }
+
+    .timeline-year {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .timeline-card h3 {
+        font-size: 0.95rem;
+        margin: 0.5rem 0;
+    }
+
+    .timeline-card p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .tag {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
     }
     
     /* Modal - OPTIMIZED FOR VERY SMALL SCREENS */
