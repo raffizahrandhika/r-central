@@ -297,6 +297,7 @@ function generateCertificateCards(certificatesData) {
 
     // Sort by ID descending (newest first)
     const sortedIds = Object.keys(certificatesData).sort((a, b) => {
+        // Konversi ke number untuk sorting numerik
         return parseInt(b) - parseInt(a);
     });
 
