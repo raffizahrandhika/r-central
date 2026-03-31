@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuis Kebencanaan Cute</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -79,11 +79,11 @@
             font-weight: bold;
             font-family: 'Quicksand', sans-serif;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
             font-size: 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .btn-admin:hover { background: #f0f8ff; }
+        .btn-admin:hover { background: #f0f8ff; transform: scale(1.05); }
 
         #main-content {
             padding: 20px;
@@ -240,7 +240,7 @@
             border: none;
             border-color: transparent;
         }
-        .btn-submit-main:hover { opacity: 0.9; }
+        .btn-submit-main:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 154, 158, 0.4); }
 
         /* Modals - Optimized for Mobile */
         .modal-overlay {
@@ -252,7 +252,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 20px; /* Safe space margin from screen edges */
+            padding: 20px; 
             box-sizing: border-box;
         }
 
@@ -354,14 +354,146 @@
             line-height: 1.6;
         }
 
-        /* Dashboard */
-        #dashboard { background: white; padding: 25px 20px; border-radius: 20px; margin-top: 20px; }
-        .leaderboard-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
-        .leaderboard-header { font-weight: bold; color: var(--blue-dark); border-bottom: 2px solid var(--pink); }
+        /* --- Dashboard Redesign --- */
+        #dashboard { background: white; padding: 25px 20px; border-radius: 20px; margin-top: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
+        
+        .dashboard-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #eee;
+        }
 
-        .loading-text { text-align: center; color: var(--blue-dark); padding: 20px; font-weight: bold; }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .loading-text { text-align: center; color: var(--blue-dark); padding: 30px 20px; font-weight: bold; font-size: 15px; }
+
+        /* Leaderboard Cards */
+        .leaderboard-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 18px;
+            border-radius: 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 2px solid transparent;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .leaderboard-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(160, 196, 255, 0.2);
+            border-color: var(--blue);
+        }
+
+        /* Top 3 Styling */
+        .rank-1 { border-color: #f1c40f; background: #fffdf5; }
+        .rank-2 { border-color: #bdc3c7; background: #f8f9fa; }
+        .rank-3 { border-color: #e67e22; background: #fffaf5; }
+
+        .rank-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: white;
+            margin-right: 15px;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+            background: var(--blue-dark);
+        }
+
+        .score-badge {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--pink-dark);
+            background: #fff0f5;
+            padding: 8px 18px;
+            border-radius: 15px;
+            border: 2px dashed var(--pink);
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .crown-icon {
+            position: absolute;
+            top: -12px;
+            left: -8px;
+            font-size: 24px;
+            color: #f1c40f;
+            transform: rotate(-20deg);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            z-index: 10;
+        }
 
         .hidden { display: none !important; }
+
+        /* --- PRINT STYLES (PDF EXPORT) --- */
+        @media print {
+            /* Agar warna background kartu dan badge tetap tercetak */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: white !important;
+                color: black;
+            }
+
+            /* Sembunyikan elemen yang tidak perlu dicetak */
+            .header, 
+            .action-buttons, 
+            .admin-controls, 
+            .modal-overlay,
+            title {
+                display: none !important;
+            }
+
+            #main-content {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            #dashboard {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .dashboard-header-area {
+                border-bottom: 2px solid #000;
+                margin-bottom: 30px;
+                padding-bottom: 10px;
+            }
+
+            .dashboard-header-area h2 {
+                color: #000 !important;
+                font-size: 24px;
+            }
+
+            .leaderboard-card {
+                page-break-inside: avoid;
+                border: 1px solid #eee;
+                box-shadow: none;
+                margin-bottom: 8px;
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -459,18 +591,31 @@
 
         <!-- DASHBOARD VIEW -->
         <div id="dashboard" class="hidden">
-            <h2 style="text-align: center; color: var(--pink-dark)"><i class="fa-solid fa-trophy"></i> Papan Nilai</h2>
-            <p style="text-align: center; font-size: 12px; color: var(--text-light); margin-bottom: 10px;">(Data Real-Time dari Google Spreadsheet)</p>
+            <div class="dashboard-header-area">
+                <div>
+                    <h2 style="color: var(--pink-dark); margin: 0;"><i class="fa-solid fa-trophy"></i> Papan Nilai</h2>
+                    <p style="font-size: 12px; color: var(--text-light); margin: 5px 0 0 0;" id="print-date">Data Real-Time Spreadsheet</p>
+                </div>
+                <!-- Tombol Action -->
+                <div class="action-buttons">
+                    <button class="btn-admin" onclick="printDashboard()" style="background: #2ecc71; color: white; padding: 10px 15px; border-radius: 15px;">
+                        <i class="fa-solid fa-print"></i> Cetak / PDF
+                    </button>
+                    <button class="btn-admin" onclick="fetchDashboardData()" style="background: var(--blue-dark); color: white; padding: 10px 15px; border-radius: 15px;">
+                        <i class="fa-solid fa-rotate-right" id="refresh-icon"></i> Segarkan
+                    </button>
+                </div>
+            </div>
 
             <div id="leaderboard-data">
                 <div class="loading-text"><i class="fa-solid fa-spinner fa-spin"></i> Menghubungkan ke Spreadsheet...</div>
             </div>
             
-            <div style="margin-top: 30px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
-                <p style="font-size: 12px; color: #e74c3c;">Zona Bahaya (Testing)</p>
+            <div class="admin-controls" style="margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+                <p style="font-size: 12px; color: #e74c3c; margin-bottom: 10px;">Zona Bahaya (Testing)</p>
                 <button class="btn-modal btn-danger" onclick="resetLocalStorage()"><i class="fa-solid fa-trash-can"></i> Hapus Data Local Storage</button>
                 <br>
-                <button class="btn-control" onclick="backToQuiz()" style="margin-top: 15px;"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                <button class="btn-control" onclick="backToQuiz()" style="margin-top: 15px; max-width: 200px;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Kuis</button>
             </div>
         </div>
 
@@ -960,70 +1105,87 @@
             fetch(formURL, { method: "POST", mode: "no-cors", body: formData }).catch(e => console.error(e));
         }
 
-        // --- FETCH DASHBOARD (SPREADSHEET CSV) DYNAMIC CALCULATION ---
+        // --- PRINT FUNCTION ---
+        function printDashboard() {
+            playSound('click');
+            window.print();
+        }
+
+        // --- FETCH DASHBOARD (SPREADSHEET CSV) ---
         async function fetchDashboardData() {
+            playSound('click');
             const board = document.getElementById("leaderboard-data");
-            board.innerHTML = '<div class="loading-text"><i class="fa-solid fa-spinner fa-spin"></i> Menghubungkan ke Spreadsheet...</div>';
+            const refreshIcon = document.getElementById("refresh-icon");
+            
+            refreshIcon.classList.add("fa-spin");
+            board.innerHTML = '<div class="loading-text"><i class="fa-solid fa-spinner fa-spin" style="color: var(--pink-dark); font-size: 24px; margin-bottom: 10px; display: block;"></i> Menyinkronkan Data...</div>';
             
             try {
-                // Fetching CSV dari link Publikasi Google Sheet
-                const response = await fetch(CSV_URL);
+                const response = await fetch(CSV_URL + "&t=" + new Date().getTime());
                 if(!response.ok) throw new Error("Gagal mengambil data");
                 
                 const csvText = await response.text();
-                // Memisahkan berdasarkan baris (skip header di index 0)
                 const rows = csvText.split('\n').slice(1); 
                 
                 let participants = [];
-                const totalQuestions = questionsData.length; // 15
+                const totalQuestions = questionsData.length; 
                 
                 rows.forEach(row => {
                     if (!row.trim()) return;
-                    // Memecah CSV dengan Regex dasar (mengabaikan koma di dalam tanda kutip)
                     const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     
-                    if (cols.length >= 18) { // Setidaknya harus ada sampai kolom jawaban ke-15
-                        // Kolom 2 (index 2) adalah Nama Lengkap
+                    if (cols.length >= 18) { 
                         const pName = cols[2].replace(/"/g, '').trim();
                         
-                        // Menghitung jumlah benar manual dari kolom jawaban peserta (index 3 sampai 17)
                         let correctAnswers = 0;
                         for (let i = 0; i < totalQuestions; i++) {
-                            // Ambil jawaban peserta dari CSV (kolom index 3 = soal 1, index 4 = soal 2, dst)
                             let pAnswer = cols[3 + i] ? cols[3 + i].replace(/"/g, '').trim().toUpperCase() : "";
-                            // Ambil kunci jawaban asli
                             let correctAnswer = questionsData[i].answer.toUpperCase();
-                            
-                            if (pAnswer === correctAnswer) {
-                                correctAnswers++;
-                            }
+                            if (pAnswer === correctAnswer) correctAnswers++;
                         }
                         
-                        // Konversi ke skala 100 berdasarkan jumlah jawaban benar / 15
                         const finalScore = Math.round((correctAnswers / totalQuestions) * 100); 
-                        
                         participants.push({ name: pName, rawScore: correctAnswers, finalScore: finalScore });
                     }
                 });
                 
-                // Urutkan dari nilai terbesar
                 participants.sort((a, b) => b.finalScore - a.finalScore);
                 
-                let html = `
-                    <div class="leaderboard-item leaderboard-header">
-                        <span>Nama Peserta</span>
-                        <span>Nilai Konversi</span>
-                    </div>
-                `;
+                let html = "";
+                
+                // Set text tanggal untuk keperluan Print
+                const now = new Date();
+                document.getElementById("print-date").innerText = "Dicetak pada: " + now.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' });
                 
                 if(participants.length === 0) {
-                    html += `<div style="text-align:center; padding: 20px; color: #888;">Belum ada data respons yang lengkap.</div>`;
+                    html += `<div style="text-align:center; padding: 30px; color: var(--text-light); background: #f9f9f9; border-radius: 15px; border: 2px dashed #eee;"><i class="fa-regular fa-folder-open" style="font-size: 30px; margin-bottom: 10px; display: block; color: #ccc;"></i> Belum ada data respons yang masuk.</div>`;
                 } else {
                     participants.forEach((p, i) => {
+                        let rankClass = "";
+                        let crownHtml = "";
+                        let rankBg = "var(--blue-dark)";
+
+                        if (i === 0) {
+                            rankClass = "rank-1"; crownHtml = `<i class="fa-solid fa-crown crown-icon"></i>`; rankBg = "linear-gradient(135deg, #f1c40f, #f39c12)";
+                        } else if (i === 1) {
+                            rankClass = "rank-2"; rankBg = "linear-gradient(135deg, #bdc3c7, #95a5a6)";
+                        } else if (i === 2) {
+                            rankClass = "rank-3"; rankBg = "linear-gradient(135deg, #e67e22, #d35400)";
+                        }
+
                         html += `
-                            <div class="leaderboard-item">
-                                <span><b>${i + 1}.</b> ${p.name} <br><span style="font-size:10px; color:#aaa;">(Benar: ${p.rawScore}/${totalQuestions})</span></span>
-                                <span style="color: var(--pink-dark); font-weight: bold; font-size: 18px;">${p.finalScore}</span>
+                            <div class="leaderboard-card ${rankClass}">
+                                ${crownHtml}
+                                <div style="display: flex; align-items: center;">
+                                    <div class="rank-badge" style="background: ${rankBg};">${i + 1}</div>
+                                    <div>
+                                        <div style="font-weight: 700; color: var(--text); font-size: 15px;">${p.name}</div>
+                                        <div style="font-size: 11px; color: var(--text-light); margin-top: 3px;"><i class="fa-solid fa-bullseye" style="color: var(--pink);"></i> Benar: ${p.rawScore}/${totalQuestions}</div>
+                                    </div>
+                                </div>
+                                <div class="score-badge">
+                                    ${p.finalScore}
+                                </div>
                             </div>
                         `;
                     });
@@ -1031,8 +1193,10 @@
                 board.innerHTML = html;
 
             } catch (err) {
-                board.innerHTML = '<div class="loading-text" style="color: #e74c3c;"><i class="fa-solid fa-triangle-exclamation"></i> Gagal memuat data.</div>';
+                board.innerHTML = '<div class="loading-text" style="color: #e74c3c;"><i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; margin-bottom: 10px; display: block;"></i> Gagal memuat data.</div>';
                 console.error(err);
+            } finally {
+                refreshIcon.classList.remove("fa-spin");
             }
         }
 
@@ -1047,7 +1211,6 @@
             document.getElementById("cheat-modal").classList.add("hidden");
         }
 
-        // Anti cheat hanya aktif ketika status kuis BELUM disubmit
         document.addEventListener('contextmenu', e => { 
             if(!state.isSubmitted) { e.preventDefault(); showCheatModal("Klik kanan dinonaktifkan saat mengerjakan kuis."); }
         });
@@ -1081,7 +1244,6 @@
                 document.getElementById("main-content").classList.remove("blurred");
                 document.getElementById("dashboard").classList.remove("hidden");
                 
-                // Ambil data sheet CSV
                 fetchDashboardData();
             } else {
                 playSound('error');
